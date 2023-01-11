@@ -10,6 +10,12 @@ import { useAnaliseCreditoStore } from '../../../store/useAnaliseCreditoStore';
 import { DynamicIcon } from '../../DynamicIcon';
 import { AppLottiePlayer } from '../../_app/AppLottiePlayer';
 
+// const testSubmitStatus = {
+//   message: '',
+//   error: true,
+//   loading: false,
+// };
+
 export type SubmitingStatus = {
   message?: string;
   error?: boolean;
@@ -87,6 +93,19 @@ export const ModalSubmit = ({ onClose, submitingStatus }: ModalSubmitProps) => {
                   <DynamicIcon icon="close" />
                 </Flex>
                 <Text>{submitingStatus.message}</Text>
+                <Text fontSize="14px">
+                  Caso precise de ajuda entre em contato com o Atendimento
+                  Shopbanx via{' '}
+                  <Text
+                    as="a"
+                    color="primary.base"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://api.whatsapp.com/send?phone=551123693128"
+                  >
+                    <Text as="strong">WhatsApp</Text>
+                  </Text>
+                </Text>
                 <Flex w="100%">
                   <Button
                     onClick={() => handleFailCloseModal()}

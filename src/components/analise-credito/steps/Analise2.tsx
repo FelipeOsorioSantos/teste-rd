@@ -524,6 +524,7 @@ export const Analise2 = () => {
 
         <Modal
           isOpen={submitModal.isOpen}
+          // isOpen={true}
           onClose={submitModal.onClose}
           isCentered
         >
