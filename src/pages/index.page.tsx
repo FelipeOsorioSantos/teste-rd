@@ -32,6 +32,8 @@ const Home: NextPage = () => {
       <AppGlobalContainer
         zIndex="1"
         justifyContent={isLargerThan768 ? 'center' : 'flex-start'}
+        overflowY={'scroll'}
+        mb={isLargerThan768 ? '0px' : '32px'}
       >
         <Flex justifyContent={isLargerThan768 ? 'flex-end' : 'center'}>
           <FormAnaliseCredito />

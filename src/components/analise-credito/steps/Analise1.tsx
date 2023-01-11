@@ -29,7 +29,7 @@ const options = [
 export const Analise1 = () => {
   const { setAnaliseCreditoForm, setAnaliseCreditoStep } =
     useAnaliseCreditoStore();
-  const [value, setValue] = useState<string>('10.000,00');
+  const [value, setValue] = useState<string>('15.000,00');
 
   const [selectedOption, setSelectedOption] = useState<{
     id: string;
@@ -43,7 +43,7 @@ export const Analise1 = () => {
         const result = (unmaskCurrency(prev) + 1000) * 100;
         return maskCurrency(result.toFixed());
       });
-    } else if (method === 'subtract') {
+    } else if (method === 'subtract' && unmaskCurrency(value) > 15000) {
       setValue((prev) => {
         const result = (unmaskCurrency(prev) - 1000) * 100;
         if (result <= 0) {
@@ -54,7 +54,9 @@ export const Analise1 = () => {
   };
 
   const formDisabled =
-    Number(value) <= 0 || value === '0,00' || selectedOption.desc === '';
+    unmaskCurrency(value) < 15000 ||
+    value === '0,00' ||
+    selectedOption.desc === '';
 
   const handleSubmit = () => {
     setAnaliseCreditoForm({
@@ -75,8 +77,6 @@ export const Analise1 = () => {
       borderRadius="8px"
       mt={isLargerThan768 ? '0px' : '72px'}
       p="24px"
-      h="100%"
-      overflowY="scroll"
     >
       {/*title*/}
       <Flex>
@@ -135,6 +135,16 @@ export const Analise1 = () => {
             </Flex>
           </Flex>
         </Flex>
+        <Flex
+          fontSize="10px"
+          pt="8px"
+          // justifyContent="flex-end"
+          // pr="8px"
+          pl="4px"
+          opacity="0.6"
+        >
+          <Text>Valor mínimo da solicitação R$15.000,00</Text>
+        </Flex>
 
         {/*radio options*/}
         <Flex
@@ -143,7 +153,6 @@ export const Analise1 = () => {
           gap="8px"
           mt="32px"
           fontSize="14px"
-          // color={isLargerThan768 ? '' : 'white'}
         >
           <Text>Motivo da solicitação</Text>
           {options.map((o) => (

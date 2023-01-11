@@ -33,6 +33,7 @@ export interface ICreateLoan {
   loan_value: number;
   loan_term: number;
   loan_reason: string;
+  applicant_vinculo: string;
   // origin: string;
 }
 

@@ -12,6 +12,7 @@ import { maskDate } from '../../../utils/mask-date';
 import { maskPhone } from '../../../utils/mask-phone';
 import { AppCheckbox } from '../../_app/AppCheckbox';
 import { AppInput } from '../../_app/AppInput';
+import { AppSelect } from '../../_app/AppSelect';
 import { ModalPolitica } from '../modals/ModalPolitica';
 import { ModalSCR } from '../modals/ModalSCR';
 import { ModalSubmit, SubmitingStatus } from '../modals/ModalSubmit';
@@ -32,6 +33,27 @@ const submitingStatusInicial: SubmitingStatus = {
   loading: false,
 };
 
+//options for relationship
+
+const vinculosOptions = [
+  {
+    value: 'Sócio',
+    label: 'Sócio',
+  },
+
+  {
+    value: 'Amigo',
+    label: 'Amigo',
+  },
+  {
+    value: 'Familiar',
+    label: 'Familiar',
+  },
+  {
+    value: 'Outro',
+    label: 'Outro',
+  },
+];
 export const Analise2 = () => {
   //states
   const [authOptions, setAuthOptions] = useState(authOptionsInitial);
@@ -93,7 +115,10 @@ export const Analise2 = () => {
       loan_value: analiseCreditoForm!.valor,
       loan_term: 36,
       loan_reason: analiseCreditoForm!.motivo,
+      applicant_vinculo: formLog.vinculo,
     };
+
+    // console.log(submitObj);
     setSubmitingStatus({ message: '', error: false, loading: true });
     submitModal.onOpen();
     const response = await postCreateLoan(submitObj);
@@ -369,6 +394,16 @@ export const Analise2 = () => {
             onChange={(e) => {
               setValue('cpf', maskCPF(e.target.value));
               debouncedValidate('cpf');
+            }}
+          />
+
+          <AppSelect
+            placeholder="Escolha um..."
+            label="Vínculo com a empresa"
+            options={vinculosOptions}
+            onChange={(value) => {
+              setValue('vinculo', value.value);
+              debouncedValidate('vinculo');
             }}
           />
 

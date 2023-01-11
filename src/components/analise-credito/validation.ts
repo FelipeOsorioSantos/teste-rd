@@ -40,4 +40,5 @@ export const validacaoAnaliseCredito = object({
     .required('Campo obrigatório.')
     .test('global-ok', 'CPF Inválido.', (value) => validateCPF(value)),
   // profissao: string().required('Campo obrigatório.'),
+  vinculo: string(),
 });

@@ -17,13 +17,11 @@ export const Analise3 = () => {
       <Flex
         w="100%"
         maxW={isLargerThan768 ? '384px' : '100%'}
-        // mt={isLargerThan768 ? '0px' : '72px'}
         direction="column"
         borderRadius="8px"
         p="24px"
         overflowY="scroll"
         bg="white"
-        // display="inline-block"
       >
         {/*title*/}
         <Flex direction="column">

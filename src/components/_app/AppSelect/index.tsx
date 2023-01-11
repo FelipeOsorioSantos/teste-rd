@@ -33,6 +33,10 @@ export const AppSelect = ({
   //create a state for the selected value
   const [selectedValue, setSelectedValue] =
     useState<ISelectOption>(initialValue);
+
+  const [insidePlaceholder, setInsidePlaceholder] = useState<
+    string | undefined
+  >(placeholder);
   const [open, setOpen] = useState(false);
 
   //capture the value from options to onChange prop function
@@ -73,7 +77,9 @@ export const AppSelect = ({
         justifyContent="space-between"
         opacity={disabled ? '0.6' : '1'}
       >
-        <Text>{renderValue?.label || placeholder}</Text>
+        <Text opacity={insidePlaceholder ? 0.4 : 1} mt="4px">
+          {renderValue?.label || insidePlaceholder}
+        </Text>
         <Flex
           color="content.light"
           transform={open ? 'rotate(180deg)' : 'rotate(0deg)'}
@@ -103,6 +109,7 @@ export const AppSelect = ({
               key={`${option.value}${index}`}
               onClick={() => {
                 setSelectedValue(option);
+                setInsidePlaceholder('');
                 setOpen(false);
               }}
               borderBottom={index === options.length - 1 ? '0px' : '1px'}
