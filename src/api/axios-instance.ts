@@ -10,3 +10,10 @@ export const axiosConnection = axios.create({
       ? process.env.API_GATEWAY_LOCAL
       : process.env.API_GATEWAY_URL,
 });
+
+export const ipApi = axios.create({
+  baseURL: 'https://freeipapi.com/api/json',
+  headers: {
+    'accept-encoding': '*',
+  },
+});

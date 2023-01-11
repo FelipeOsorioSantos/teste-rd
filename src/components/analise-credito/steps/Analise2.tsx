@@ -118,9 +118,6 @@ export const Analise2 = () => {
       applicant_vinculo: formLog.vinculo,
     };
 
-    console.log(submitObj);
-
-    // console.log(submitObj);
     setSubmitingStatus({ message: '', error: false, loading: true });
     submitModal.onOpen();
     const response = await postCreateLoan(submitObj);
