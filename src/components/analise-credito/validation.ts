@@ -13,8 +13,6 @@ export const validacaoAnaliseCredito = object({
   cnpj: string()
     .required('Campo obrigatório.')
     .test('global-ok', 'CNPJ Inválido.', (value) => validateCNPJ(value)),
-  // fantasia_empresa: string().required('Campo obrigatório.'),
-  // nome_empresa: string().required('Campo obrigatório.'),
   data_fundacao: string()
     .required('Campo obrigatório.')
     .matches(birthdayRegex, 'Data inválida.')
@@ -24,15 +22,7 @@ export const validacaoAnaliseCredito = object({
     'Campo obrigatório.',
     (value) => convertCurrencyNumber(value) > 0,
   ),
-  // custos_mensal: string().test(
-  //   'global-ok',
-  //   'Campo obrigatório.',
-  //   (value) => convertCurrencyNumber(value) > 0,
-  // ),
   nome: string().required('Campo obrigatório.'),
-  // email_solicitante: string()
-  //   .email('Insira um email válido.')
-  //   .required('Campo obrigatório.'),
   telefone: string()
     .required('Campo obrigatório.')
     .matches(phoneNumberRegex, 'Formato de celular inválido.'),
@@ -40,5 +30,5 @@ export const validacaoAnaliseCredito = object({
     .required('Campo obrigatório.')
     .test('global-ok', 'CPF Inválido.', (value) => validateCPF(value)),
   // profissao: string().required('Campo obrigatório.'),
-  vinculo: string(),
+  vinculo: string().required(),
 });

@@ -56,7 +56,7 @@ export const Analise1 = () => {
   const formDisabled =
     unmaskCurrency(value) < 15000 ||
     value === '0,00' ||
-    selectedOption.desc === '';
+    selectedOption.desc.length < 4;
 
   const handleSubmit = () => {
     setAnaliseCreditoForm({
