@@ -1,8 +1,9 @@
-import { Flex, Image } from '@chakra-ui/react';
+import { Flex, Image, keyframes } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect } from 'react';
 import { AppGlobalContainer } from '../components/_app/AppGlobalContainer';
+// import { FormAnaliseCredito } from '../components/analise-credito/FormAnaliseCredito';
 import { FormAnaliseCredito } from '../components/analise-credito/FormAnaliseCredito';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { useAnaliseCreditoStore } from '../store/useAnaliseCreditoStore';
@@ -16,6 +17,16 @@ const Home: NextPage = () => {
     setAnaliseCreditoStep(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const fadeIn = keyframes`
+  from {
+    width: "0px";
+    opacity: 0
+  }
+  to {
+    width: "100%"
+    opacity: 1
+  }
+  `;
 
   return (
     <>
@@ -50,6 +61,7 @@ const Home: NextPage = () => {
         </Flex>
 
         <AppGlobalContainer
+          animation={`${fadeIn} 0.3s linear`}
           zIndex="1"
           justifyContent={isLargerThan768 ? 'center' : 'flex-start'}
           overflowY={'scroll'}
