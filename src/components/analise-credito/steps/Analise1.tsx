@@ -54,10 +54,10 @@ export const Analise1 = () => {
     }
   };
 
+  const isUnder10k = unmaskCurrency(value) < 10000;
+
   const formDisabled =
-    unmaskCurrency(value) < 10000 ||
-    value === '0,00' ||
-    selectedOption.desc.length < 4;
+    isUnder10k || value === '0,00' || selectedOption.desc.length < 4;
 
   const handleSubmit = () => {
     setAnaliseCreditoForm({
@@ -137,16 +137,13 @@ export const Analise1 = () => {
             </Flex>
           </Flex>
         </Flex>
-        <Flex
-          fontSize="10px"
-          pt="8px"
-          // justifyContent="flex-end"
-          // pr="8px"
-          pl="4px"
-          opacity="0.6"
-        >
-          <Text>Valor mínimo da solicitação R$10.000,00</Text>
-        </Flex>
+        {isUnder10k && (
+          <Flex fontSize="12px" pt="8px" pl="4px">
+            <Text color="error.base" as={'span'}>
+              Valor mínimo da solicitação R$10.000,00
+            </Text>
+          </Flex>
+        )}
 
         {/*radio options*/}
         <Flex
