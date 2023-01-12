@@ -178,6 +178,8 @@ export const Analise1 = () => {
             </Flex>
             {isOutrosSelected && (
               <AppInput
+                maxLength={250}
+                type="text"
                 name="outros-desc"
                 value={selectedOption.desc}
                 placeholder="Digite o motivo"

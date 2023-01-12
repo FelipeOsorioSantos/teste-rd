@@ -23,7 +23,6 @@ export interface ICreatePJ {
   accept_terms_sign_up: boolean;
   responsible_name: string;
   responsible_cpf: string;
-  responsible_occupation: string;
   email: string;
 }
 

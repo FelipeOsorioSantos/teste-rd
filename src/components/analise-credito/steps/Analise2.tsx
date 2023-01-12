@@ -34,8 +34,7 @@ const submitingStatusInicial: SubmitingStatus = {
   loading: false,
 };
 
-//options for relationship
-
+//options for vinculos
 const vinculosOptions = [
   {
     value: 'Sócio',
@@ -55,6 +54,7 @@ const vinculosOptions = [
     label: 'Outro',
   },
 ];
+
 export const Analise2 = () => {
   //states
   const [authOptions, setAuthOptions] = useState(authOptionsInitial);
@@ -111,7 +111,6 @@ export const Analise2 = () => {
         monthly_revenue: unmaskCurrency(formLog.faturamento_mensal),
         responsible_cpf: formLog.cpf,
         responsible_name: formLog.nome,
-        responsible_occupation: formLog.profissao,
       },
       loan_value: analiseCreditoForm!.valor,
       loan_term: 24,
@@ -160,7 +159,8 @@ export const Analise2 = () => {
         }}
       >
         <LogoShopbanx />
-        {/*title*/}
+
+        {/*titulo*/}
         <Flex>
           <Text
             as="strong"
@@ -179,8 +179,10 @@ export const Analise2 = () => {
         </Text>
 
         <Flex direction="column" gap="16px" mt="16px">
-          {/*Empresa Email*/}
+          {/*empresa email*/}
           <AppInput
+            maxLength={250}
+            type="text"
             bgColor="white"
             errorColor="error.base"
             borderColor="neutral.dark"
@@ -198,7 +200,7 @@ export const Analise2 = () => {
             name="email_empresa"
           />
 
-          {/*Empresa CNPJ*/}
+          {/*empresa cnpj*/}
           <AppInput
             bgColor="white"
             errorColor="error.base"
@@ -218,47 +220,7 @@ export const Analise2 = () => {
             }}
           />
 
-          {/*Empresa Nome*/}
-          {/* <AppInput
-            bgColor="white"
-            errorColor="error.base"
-            borderColor="neutral.dark"
-            labelColor="content.dark"
-            _placeholder={{
-              opacity: 0.4,
-            }}
-            {...register('nome_empresa')}
-            errors={errors['nome_empresa']}
-            label="Nome da empresa"
-            name="nome_empresa"
-            maxLength={18}
-            onChange={(e) => {
-              setValue('nome_empresa', e.target.value);
-              debouncedValidate('nome_empresa');
-            }}
-          /> */}
-
-          {/*Empresa Fantasia*/}
-          {/* <AppInput
-            bgColor="white"
-            errorColor="error.base"
-            borderColor="neutral.dark"
-            labelColor="content.dark"
-            _placeholder={{
-              opacity: 0.4,
-            }}
-            {...register('fantasia_empresa')}
-            errors={errors['fantasia_empresa']}
-            label="Nome Fantasia"
-            name="fantasia_empresa"
-            maxLength={18}
-            onChange={(e) => {
-              setValue('fantasia_empresa', e.target.value);
-              debouncedValidate('fantasia_empresa');
-            }}
-          /> */}
-
-          {/*Empresa Fundação*/}
+          {/*empresa fundacao*/}
           <AppInput
             bgColor="white"
             errorColor="error.base"
@@ -278,9 +240,11 @@ export const Analise2 = () => {
             }}
           />
 
-          {/*Empresa Faturamento Mensal*/}
+          {/*empresa faturamento mensal*/}
           <Flex direction="column">
             <AppInput
+              maxLength={20}
+              type="text"
               currency="R$"
               bgColor="white"
               errorColor="error.base"
@@ -307,39 +271,18 @@ export const Analise2 = () => {
               * Comprovado em conta PJ.
             </Text>
           </Flex>
-
-          {/*Empresa Custos Mensal*/}
-          {/* <AppInput
-            currency="R$"
-            currencyColor={isLargerThan768 ? '' : 'white'}
-            bgColor={isLargerThan768 ? 'white' : 'none'}
-            errorColor={isLargerThan768 ? 'error.base' : 'white'}
-            color={isLargerThan768 ? '' : 'white'}
-            borderColor={isLargerThan768 ? 'neutral.dark' : 'white'}
-            labelColor={isLargerThan768 ? 'content.dark' : 'white'}
-            _placeholder={{
-              color: isLargerThan768 ? '' : 'white',
-              opacity: 0.4,
-            }}
-            {...register('custos_mensal')}
-            errors={errors['custos_mensal']}
-            label="Custos médios mensais"
-            name="custos_mensal"
-            onChange={(e) => {
-              setValue('custos_mensal', maskCurrency(e.target.value));
-              debouncedValidate('custos_mensal');
-            }}
-          /> */}
           {/*fim*/}
         </Flex>
 
-        {/*Solicitante*/}
+        {/*solicitante*/}
         <Text as="strong" mt="16px">
           Dados do solicitante
         </Text>
         <Flex direction="column" gap="16px" mt="16px">
-          {/*Solicitante Nome*/}
+          {/*solicitante nome*/}
           <AppInput
+            maxLength={250}
+            type="text"
             bgColor="white"
             errorColor="error.base"
             borderColor="neutral.dark"
@@ -358,7 +301,7 @@ export const Analise2 = () => {
             }}
           />
 
-          {/*Solicitante Telefone*/}
+          {/*solicitante celular*/}
           <AppInput
             autoComplete="off"
             bgColor="white"
@@ -380,7 +323,7 @@ export const Analise2 = () => {
             maxLength={15}
           />
 
-          {/*Solicitante CPF*/}
+          {/*solicitante cpf*/}
           <AppInput
             bgColor="white"
             errorColor="error.base"
@@ -400,6 +343,7 @@ export const Analise2 = () => {
             }}
           />
 
+          {/*solicitante vinculo*/}
           <AppSelect
             placeholder="Escolha um..."
             label="Vínculo com a empresa"
@@ -410,31 +354,12 @@ export const Analise2 = () => {
             }}
           />
 
-          {/*Solicitante Profissao*/}
-          {/* <AppInput
-            bgColor="white"
-            errorColor="error.base"
-            borderColor="neutral.dark"
-            labelColor="content.dark"
-            _placeholder={{
-              opacity: 0.4,
-            }}
-            {...register('profissao')}
-            errors={errors['profissao']}
-            label="Profissão"
-            name="profissao"
-            onChange={(e) => {
-              setValue('profissao', e.target.value);
-              debouncedValidate('profissao');
-            }}
-          /> */}
-
           {/*fim*/}
         </Flex>
 
         {/*checkbox options*/}
         <Flex direction="column" mt="16px" gap="16px">
-          {/*policy*/}
+          {/*politica*/}
           <Flex gap="8px">
             <AppCheckbox
               borderColor="primary.base"
@@ -462,7 +387,7 @@ export const Analise2 = () => {
             </Text>
           </Flex>
 
-          {/*terms*/}
+          {/*termos*/}
           <Flex gap="8px">
             <AppCheckbox
               borderColor="primary.base"
@@ -522,7 +447,7 @@ export const Analise2 = () => {
         </Flex>
 
         {/*modals*/}
-
+        {/*modal submit*/}
         <Modal
           isOpen={submitModal.isOpen}
           // isOpen={true}
@@ -536,12 +461,17 @@ export const Analise2 = () => {
           />
         </Modal>
 
+        {/*modal politica*/}
         <Modal isOpen={politicaModal.isOpen} onClose={politicaModal.onClose}>
           <ModalPolitica onClose={politicaModal.onClose} />
         </Modal>
+
+        {/*modal termos*/}
         <Modal isOpen={termosModal.isOpen} onClose={termosModal.onClose}>
           <ModalTermos onClose={termosModal.onClose} />
         </Modal>
+
+        {/*modal scr*/}
         <Modal isOpen={scrModal.isOpen} onClose={scrModal.onClose}>
           <ModalSCR onClose={scrModal.onClose} />
         </Modal>
@@ -563,6 +493,8 @@ export const Analise2 = () => {
         >
           <Text as="strong">Continuar</Text>
         </Button>
+
+        {/*voltar*/}
         <Button
           mt="16px"
           bgColor="neutral.white"

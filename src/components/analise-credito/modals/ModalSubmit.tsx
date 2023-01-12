@@ -47,11 +47,9 @@ export const ModalSubmit = ({ onClose, submitingStatus }: ModalSubmitProps) => {
         textAlign="center"
         m={isLargerThan768 ? '32px' : '16px'}
         p="0px"
-        // borderRadius="16px"
         borderRadius="16px"
         w={isLargerThan768 ? '375px' : '100%'}
         overflowY="scroll"
-        // px={isLargerThan768 ? '0px' : '16px'}
       >
         <Flex p="28px" direction="column" alignItems="center" gap="16px">
           {submitingStatus?.loading === true && (
@@ -69,7 +67,10 @@ export const ModalSubmit = ({ onClose, submitingStatus }: ModalSubmitProps) => {
                 <Flex color="primary.base">
                   <DynamicIcon icon="checked" />
                 </Flex>
-                <Text>{submitingStatus.message}</Text>
+                <Text>
+                  Sua simulação de crédito foi enviada com sucesso! Aguarde
+                  contato do time Shopbanx.
+                </Text>
                 <Flex w="100%">
                   <Button
                     onClick={() => handleSuccessCloseModal()}

@@ -40,7 +40,7 @@ export const Analise3 = () => {
             Seu pedido de simulação de crédito foi enviado!
           </Text>
           <Text mt="16px" fontSize="16px" color="content.darker">
-            Nosso time entrará em contato em breve através dos meios abaixo para
+            Em breve nosso time entrará em contato por email e WhatsApp, para
             prosseguir com a solicitação.
           </Text>
         </Flex>
