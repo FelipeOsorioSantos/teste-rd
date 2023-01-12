@@ -1,12 +1,21 @@
 import { Flex, Image } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import Head from 'next/head';
+import { useEffect } from 'react';
 import { AppGlobalContainer } from '../components/_app/AppGlobalContainer';
 import { FormAnaliseCredito } from '../components/analise-credito/FormAnaliseCredito';
 import { useWindowSize } from '../hooks/useWindowSize';
+import { useAnaliseCreditoStore } from '../store/useAnaliseCreditoStore';
 
 const Home: NextPage = () => {
   const isLargerThan768 = useWindowSize();
+
+  const { setAnaliseCreditoStep } = useAnaliseCreditoStore();
+
+  useEffect(() => {
+    setAnaliseCreditoStep(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

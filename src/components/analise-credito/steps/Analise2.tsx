@@ -10,6 +10,7 @@ import { maskCNPJ, maskCPF } from '../../../utils/mask-cpf';
 import { maskCurrency, unmaskCurrency } from '../../../utils/mask-currency';
 import { maskDate } from '../../../utils/mask-date';
 import { maskPhone } from '../../../utils/mask-phone';
+import { LogoShopbanx } from '../../LogoShopbanx';
 import { AppCheckbox } from '../../_app/AppCheckbox';
 import { AppInput } from '../../_app/AppInput';
 import { AppSelect } from '../../_app/AppSelect';
@@ -102,7 +103,7 @@ export const Analise2 = () => {
       create_pj_data: {
         accept_terms_sign_up: hasAcceptedEverything,
         cnpj: formLog.cnpj,
-        commercial_phone: formLog.telefone,
+        commercial_phone: formLog.celular,
         company_name: formLog.nome_empresa,
         email: formLog.email_empresa,
         fantasy_name: formLog.fantasia_empresa,
@@ -113,7 +114,7 @@ export const Analise2 = () => {
         responsible_occupation: formLog.profissao,
       },
       loan_value: analiseCreditoForm!.valor,
-      loan_term: 36,
+      loan_term: 24,
       loan_reason: analiseCreditoForm!.motivo,
       applicant_vinculo: formLog.vinculo,
     };
@@ -158,6 +159,7 @@ export const Analise2 = () => {
           scrollbarWidth: 'none' /* Firefox */,
         }}
       >
+        <LogoShopbanx />
         {/*title*/}
         <Flex>
           <Text
@@ -358,21 +360,22 @@ export const Analise2 = () => {
 
           {/*Solicitante Telefone*/}
           <AppInput
+            autoComplete="off"
             bgColor="white"
             errorColor="error.base"
             borderColor="neutral.dark"
             labelColor="content.dark"
-            placeholder="Telefone"
+            placeholder="(11) 91234-5678"
             _placeholder={{
               opacity: 0.4,
             }}
-            {...register('telefone')}
-            errors={errors['telefone']}
-            label="Telefone"
-            name="telefone"
+            {...register('celular')}
+            errors={errors['celular']}
+            label="Celular"
+            name="celular"
             onChange={(e) => {
-              setValue('telefone', maskPhone(e.target.value));
-              debouncedValidate('telefone');
+              setValue('celular', maskPhone(e.target.value));
+              debouncedValidate('celular');
             }}
             maxLength={15}
           />
@@ -383,6 +386,7 @@ export const Analise2 = () => {
             errorColor="error.base"
             borderColor="neutral.dark"
             labelColor="content.dark"
+            placeholder="123.456.768-99"
             _placeholder={{
               opacity: 0.4,
             }}
@@ -522,6 +526,7 @@ export const Analise2 = () => {
         <Modal
           isOpen={submitModal.isOpen}
           // isOpen={true}
+          closeOnOverlayClick={false}
           onClose={submitModal.onClose}
           isCentered
         >

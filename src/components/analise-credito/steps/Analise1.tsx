@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { useAnaliseCreditoStore } from '../../../store/useAnaliseCreditoStore';
 import { maskCurrency, unmaskCurrency } from '../../../utils/mask-currency';
+import { LogoShopbanx } from '../../LogoShopbanx';
 import { AppInput } from '../../_app/AppInput';
 import { AppRadio } from '../../_app/AppRadio';
 
@@ -29,7 +30,7 @@ const options = [
 export const Analise1 = () => {
   const { setAnaliseCreditoForm, setAnaliseCreditoStep } =
     useAnaliseCreditoStore();
-  const [value, setValue] = useState<string>('15.000,00');
+  const [value, setValue] = useState<string>('10.000,00');
 
   const [selectedOption, setSelectedOption] = useState<{
     id: string;
@@ -43,7 +44,7 @@ export const Analise1 = () => {
         const result = (unmaskCurrency(prev) + 1000) * 100;
         return maskCurrency(result.toFixed());
       });
-    } else if (method === 'subtract' && unmaskCurrency(value) > 15000) {
+    } else if (method === 'subtract' && unmaskCurrency(value) > 10000) {
       setValue((prev) => {
         const result = (unmaskCurrency(prev) - 1000) * 100;
         if (result <= 0) {
@@ -54,7 +55,7 @@ export const Analise1 = () => {
   };
 
   const formDisabled =
-    unmaskCurrency(value) < 15000 ||
+    unmaskCurrency(value) < 10000 ||
     value === '0,00' ||
     selectedOption.desc.length < 4;
 
@@ -78,6 +79,7 @@ export const Analise1 = () => {
       mt={isLargerThan768 ? '0px' : '72px'}
       p="24px"
     >
+      <LogoShopbanx />
       {/*title*/}
       <Flex>
         <Text
@@ -143,7 +145,7 @@ export const Analise1 = () => {
           pl="4px"
           opacity="0.6"
         >
-          <Text>Valor mínimo da solicitação R$15.000,00</Text>
+          <Text>Valor mínimo da solicitação R$10.000,00</Text>
         </Flex>
 
         {/*radio options*/}

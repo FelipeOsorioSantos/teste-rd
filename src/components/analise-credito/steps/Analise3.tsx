@@ -12,6 +12,12 @@ export const Analise3 = () => {
     setAnaliseCreditoStep(1);
   };
 
+  const handleGoToShopBanx = () => {
+    if (typeof window !== 'undefined') {
+      window.location.href = 'https://www.shopbanx.com.br';
+    }
+  };
+
   return (
     <Flex h={isLargerThan768 ? '100%' : '100vh'} alignItems="center">
       <Flex
@@ -40,7 +46,7 @@ export const Analise3 = () => {
         </Flex>
 
         {/*submit*/}
-        <Button
+        {/* <Button
           mt="32px"
           w="100%"
           bgColor="primary.base"
@@ -54,7 +60,7 @@ export const Analise3 = () => {
           }}
         >
           <Text as="strong">Fazer nova simulação</Text>
-        </Button>
+        </Button> */}
         <Button
           mt="16px"
           w="100%"
@@ -66,10 +72,11 @@ export const Analise3 = () => {
           borderRadius={8}
           gap="8px"
           onClick={() => {
-            router.push('/');
+            // router.push('/');
+            handleGoToShopBanx();
           }}
         >
-          <Text as="strong">Ir para o início</Text>
+          <Text as="strong">Voltar para Shopbanx</Text>
         </Button>
       </Flex>
     </Flex>

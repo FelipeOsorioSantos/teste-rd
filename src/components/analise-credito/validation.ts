@@ -7,6 +7,7 @@ const phoneNumberRegex = /[\(]?[0-9]{2}[\)]?[\s]?[0-9]{5}[\-]?[0-9]{4}/;
 const birthdayRegex = /[0-9]{2}[\/]?[0-9]{2}[\/]?[0-9]{4}/;
 
 export const validacaoAnaliseCredito = object({
+  //dados empresa
   email_empresa: string()
     .email('Insira um email válido.')
     .required('Campo obrigatório.'),
@@ -22,13 +23,13 @@ export const validacaoAnaliseCredito = object({
     'Campo obrigatório.',
     (value) => convertCurrencyNumber(value) > 0,
   ),
+  //dados solicitante
   nome: string().required('Campo obrigatório.'),
-  telefone: string()
+  celular: string()
     .required('Campo obrigatório.')
     .matches(phoneNumberRegex, 'Formato de celular inválido.'),
   cpf: string()
     .required('Campo obrigatório.')
     .test('global-ok', 'CPF Inválido.', (value) => validateCPF(value)),
-  // profissao: string().required('Campo obrigatório.'),
   vinculo: string().required(),
 });
