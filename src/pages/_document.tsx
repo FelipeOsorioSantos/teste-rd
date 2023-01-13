@@ -11,7 +11,6 @@ export default class CustomDocument extends Document {
           <meta charSet="UTF-8" />
           <meta content="ie=edge" httpEquiv="X-UA-Compatible" />
         </Head>
-
         <body>
           <script>0</script>
           <Main />

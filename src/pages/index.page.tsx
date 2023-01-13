@@ -1,9 +1,9 @@
 import { Flex, Image } from '@chakra-ui/react';
 import { keyframes } from '@emotion/react';
 import { NextPage } from 'next';
-import Head from 'next/head';
 import { useEffect } from 'react';
 import { AppGlobalContainer } from '../components/_app/AppGlobalContainer';
+import { AppSeo } from '../components/_app/AppSeo';
 import { FormAnaliseCredito } from '../components/analise-credito/FormAnaliseCredito';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { useAnaliseCreditoStore } from '../store/useAnaliseCreditoStore';
@@ -31,9 +31,12 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Shopbanx - Solicitação de crédito</title>
-      </Head>
+      <AppSeo
+        image="/images/meta/credito.png"
+        title="Crédito | Shopbanx"
+        description="Aqui você faz uma simulação e recebe uma super oferta de crédito"
+        url="credito.shopbanx.com.br"
+      />
       <Flex bg="#CA004F" h="100vh" w="100vw" position="relative">
         <Flex
           display="block"
