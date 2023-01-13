@@ -3,7 +3,6 @@ import { keyframes } from '@emotion/react';
 import { NextPage } from 'next';
 import { useEffect } from 'react';
 import { AppGlobalContainer } from '../components/_app/AppGlobalContainer';
-import { AppSeo } from '../components/_app/AppSeo';
 import { FormAnaliseCredito } from '../components/analise-credito/FormAnaliseCredito';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { useAnaliseCreditoStore } from '../store/useAnaliseCreditoStore';
@@ -30,53 +29,39 @@ const Home: NextPage = () => {
   `;
 
   return (
-    <>
-      <AppSeo
-        image="/images/meta/credito.png"
-        title="Crédito | Shopbanx"
-        description="Aqui você faz uma simulação e recebe uma super oferta de crédito"
-        url="credito.shopbanx.com.br"
-      />
-      <Flex bg="#CA004F" h="100vh" w="100vw" position="relative">
-        <Flex
-          display="block"
+    <Flex bg="#CA004F" h="100vh" w="100vw" position="relative">
+      <Flex display="block" position="absolute" zIndex="0" h="100vh" w="100vw">
+        <Image
+          display={isLargerThan768 ? 'flex' : 'none'}
+          h="100%"
+          src="./analise-credito/hero1.webp"
+          alt="Análise de Crédito"
+          objectFit="cover"
           position="absolute"
-          zIndex="0"
-          h="100vh"
-          w="100vw"
-        >
-          <Image
-            display={isLargerThan768 ? 'flex' : 'none'}
-            h="100%"
-            src="./analise-credito/hero1.webp"
-            alt="Análise de Crédito"
-            objectFit="cover"
-            position="absolute"
-            pl="5%"
-            pt="30px"
-          />
-          <Image
-            w="100%"
-            objectFit="cover"
-            h="100%"
-            src="./analise-credito/bg.webp"
-            alt="Análise Background"
-          />
-        </Flex>
-
-        <AppGlobalContainer
-          animation={`${fadeIn} 0.3s linear`}
-          zIndex="1"
-          justifyContent={isLargerThan768 ? 'center' : 'flex-start'}
-          overflowY={'scroll'}
-          mb={isLargerThan768 ? '0px' : '32px'}
-        >
-          <Flex justifyContent={isLargerThan768 ? 'flex-end' : 'center'}>
-            <FormAnaliseCredito />
-          </Flex>
-        </AppGlobalContainer>
+          pl="5%"
+          pt="30px"
+        />
+        <Image
+          w="100%"
+          objectFit="cover"
+          h="100%"
+          src="./analise-credito/bg.webp"
+          alt="Análise Background"
+        />
       </Flex>
-    </>
+
+      <AppGlobalContainer
+        animation={`${fadeIn} 0.3s linear`}
+        zIndex="1"
+        justifyContent={isLargerThan768 ? 'center' : 'flex-start'}
+        overflowY={'scroll'}
+        mb={isLargerThan768 ? '0px' : '32px'}
+      >
+        <Flex justifyContent={isLargerThan768 ? 'flex-end' : 'center'}>
+          <FormAnaliseCredito />
+        </Flex>
+      </AppGlobalContainer>
+    </Flex>
   );
 };
 

@@ -1,18 +1,16 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document';
-// import emotionCache from '../lib/emotion-cache';
+import Document, { Html, Main, NextScript } from 'next/document';
 
-// const { extractCritical } = createEmotionServer(emotionCache);
+export default class MyDocument extends Document {
+  static async getInitialProps(ctx: any) {
+    const initialProps = await Document.getInitialProps(ctx);
 
-export default class CustomDocument extends Document {
+    return { ...initialProps };
+  }
+
   render() {
     return (
-      <Html lang="en">
-        <Head>
-          <meta charSet="UTF-8" />
-          <meta content="ie=edge" httpEquiv="X-UA-Compatible" />
-        </Head>
+      <Html lang="pt-BR">
         <body>
-          <script>0</script>
           <Main />
           <NextScript />
         </body>
