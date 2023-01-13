@@ -37,7 +37,6 @@ export const Analise1 = () => {
     desc: string;
   }>({ id: '', desc: '' });
   const isLargerThan768 = useWindowSize();
-
   const handleValue = (method: string) => {
     if (method === 'add') {
       setValue((prev) => {
@@ -71,8 +70,9 @@ export const Analise1 = () => {
 
   return (
     <Flex
-      w="100%"
       maxW={isLargerThan768 ? '384px' : '100%'}
+      // maxW="384px"
+      w="100%"
       bg="white"
       direction="column"
       borderRadius="8px"
