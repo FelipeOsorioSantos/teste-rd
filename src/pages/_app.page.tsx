@@ -19,7 +19,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         image="/images/meta/credito.png"
         title="Crédito | Shopbanx"
         description="Aqui você faz uma simulação e recebe uma super oferta de crédito"
-        url="credito.shopbanx.com.br"
+        url="https://credito.shopbanx.com.br"
       />
       <ChakraProvider theme={theme}>
         {mounted && <Component {...pageProps} />}
