@@ -55,6 +55,8 @@ export const Analise1 = () => {
 
   const isUnder10k = unmaskCurrency(value) < 10000;
 
+  console.log(unmaskCurrency(value));
+
   const formDisabled =
     isUnder10k || value === '0,00' || selectedOption.desc.length < 4;
 
