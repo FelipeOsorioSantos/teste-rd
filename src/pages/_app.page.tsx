@@ -2,6 +2,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
+import TagManager from 'react-gtm-module';
 import { AppSeo } from '../components/_app/AppSeo';
 import '../styles/fonts.css';
 import '../styles/index.css';
@@ -12,7 +13,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     setMounted(true);
+    TagManager.initialize({ gtmId: 'GTM-K3F5TP5' });
   }, []);
+
+  // useEffect(() => {}, []);
+
   return (
     <>
       <AppSeo
