@@ -490,6 +490,7 @@ export const Analise2 = () => {
             bgColor: 'primary.dark',
           }}
           disabled={formDisabled}
+          id="continuar"
         >
           <Text as="strong">Continuar</Text>
         </Button>
@@ -512,6 +513,7 @@ export const Analise2 = () => {
             handleGoBack();
           }}
           _hover={{ color: 'primary.dark' }}
+          id="voltar_form"
         >
           <Text as="strong">Voltar</Text>
         </Button>

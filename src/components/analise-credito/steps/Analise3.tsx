@@ -75,6 +75,7 @@ export const Analise3 = () => {
             // router.push('/');
             handleGoToShopBanx();
           }}
+          id="voltar_shopbanx"
         >
           <Text as="strong">Voltar para Shopbanx</Text>
         </Button>

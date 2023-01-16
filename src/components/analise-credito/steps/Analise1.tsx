@@ -203,6 +203,7 @@ export const Analise1 = () => {
           bgColor: 'primary.dark',
         }}
         disabled={formDisabled}
+        id="simule"
       >
         <Text as="strong">Simule</Text>
       </Button>
