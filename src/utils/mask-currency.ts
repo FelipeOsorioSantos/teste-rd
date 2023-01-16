@@ -33,7 +33,6 @@ export const unmaskCurrency = (input: string): number => {
   // if input is a string return its value to number
   if (typeof input === 'string') {
     const format = input && input.replaceAll('.', '').replace(',', '.');
-    console.log(format);
 
     const toNumber = (parseFloat(format) * 100) / 100;
     if (isNaN(toNumber)) {
