@@ -89,7 +89,7 @@ export const Analise1 = () => {
           lineHeight="120%"
           color="primary.dark"
         >
-          Simule uma avialiação de crédito e receba sua proposta!
+          Simule uma avaliação de crédito e receba sua proposta!
         </Text>
       </Flex>
 
