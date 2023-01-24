@@ -16,17 +16,18 @@ import { AppLottiePlayer } from '../../_app/AppLottiePlayer';
 //   loading: false,
 // };
 
-export type SubmitingStatus = {
+export type SubmitStatus = {
   message?: string;
   error?: boolean;
   loading?: boolean;
+  status?: number;
 };
 interface ModalSubmitProps {
   onClose: () => void;
-  submitingStatus?: SubmitingStatus;
+  submitStatus?: SubmitStatus;
 }
 
-export const ModalSubmit = ({ onClose, submitingStatus }: ModalSubmitProps) => {
+export const ModalSubmit = ({ onClose, submitStatus }: ModalSubmitProps) => {
   const isLargerThan768 = useWindowSize();
   const { setAnaliseCreditoStep } = useAnaliseCreditoStore();
 
@@ -52,7 +53,7 @@ export const ModalSubmit = ({ onClose, submitingStatus }: ModalSubmitProps) => {
         overflowY="scroll"
       >
         <Flex p="28px" direction="column" alignItems="center" gap="16px">
-          {submitingStatus?.loading === true && (
+          {submitStatus?.loading === true && (
             <>
               <Text as="strong">Enviando dados...</Text>
               <Flex>
@@ -61,68 +62,66 @@ export const ModalSubmit = ({ onClose, submitingStatus }: ModalSubmitProps) => {
             </>
           )}
 
-          {submitingStatus?.loading === false &&
-            submitingStatus?.error === false && (
-              <>
-                <Flex color="primary.base">
-                  <DynamicIcon icon="checked" />
-                </Flex>
-                <Text>
-                  Sua simulação de crédito foi enviada com sucesso! Aguarde
-                  contato do time Shopbanx.
+          {submitStatus?.loading === false && submitStatus.status === 201 && (
+            <>
+              <Flex color="primary.base">
+                <DynamicIcon icon="checked" />
+              </Flex>
+              <Text>
+                Sua simulação de crédito foi enviada com sucesso! Aguarde
+                contato do time Shopbanx.
+              </Text>
+              <Flex w="100%">
+                <Button
+                  onClick={() => handleSuccessCloseModal()}
+                  w="100%"
+                  type="submit"
+                  bgColor="primary.base"
+                  color="white"
+                  fontSize="14px"
+                  borderRadius={8}
+                  _hover={{ bgColor: 'primary.dark' }}
+                >
+                  <Text as="strong">Fechar</Text>
+                </Button>
+              </Flex>
+            </>
+          )}
+          {submitStatus?.loading === false && submitStatus?.error === true && (
+            <>
+              <Flex color="primary.base">
+                <DynamicIcon icon="close" />
+              </Flex>
+              <Text>{submitStatus.message}</Text>
+              <Text fontSize="14px">
+                Caso precise de ajuda entre em contato com o Atendimento
+                Shopbanx via{' '}
+                <Text
+                  as="a"
+                  color="primary.base"
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://api.whatsapp.com/send?phone=551123693128"
+                >
+                  <Text as="strong">WhatsApp</Text>
                 </Text>
-                <Flex w="100%">
-                  <Button
-                    onClick={() => handleSuccessCloseModal()}
-                    w="100%"
-                    type="submit"
-                    bgColor="primary.base"
-                    color="white"
-                    fontSize="14px"
-                    borderRadius={8}
-                    _hover={{ bgColor: 'primary.dark' }}
-                  >
-                    <Text as="strong">Fechar</Text>
-                  </Button>
-                </Flex>
-              </>
-            )}
-          {submitingStatus?.loading === false &&
-            submitingStatus?.error === true && (
-              <>
-                <Flex color="primary.base">
-                  <DynamicIcon icon="close" />
-                </Flex>
-                <Text>{submitingStatus.message}</Text>
-                <Text fontSize="14px">
-                  Caso precise de ajuda entre em contato com o Atendimento
-                  Shopbanx via{' '}
-                  <Text
-                    as="a"
-                    color="primary.base"
-                    target="_blank"
-                    rel="noreferrer"
-                    href="https://api.whatsapp.com/send?phone=551123693128"
-                  >
-                    <Text as="strong">WhatsApp</Text>
-                  </Text>
-                </Text>
-                <Flex w="100%">
-                  <Button
-                    onClick={() => handleFailCloseModal()}
-                    w="100%"
-                    type="submit"
-                    bgColor="primary.base"
-                    color="white"
-                    fontSize="14px"
-                    borderRadius={8}
-                    _hover={{ bgColor: 'primary.dark' }}
-                  >
-                    <Text as="strong">Voltar</Text>
-                  </Button>
-                </Flex>
-              </>
-            )}
+              </Text>
+              <Flex w="100%">
+                <Button
+                  onClick={() => handleFailCloseModal()}
+                  w="100%"
+                  type="submit"
+                  bgColor="primary.base"
+                  color="white"
+                  fontSize="14px"
+                  borderRadius={8}
+                  _hover={{ bgColor: 'primary.dark' }}
+                >
+                  <Text as="strong">Voltar</Text>
+                </Button>
+              </Flex>
+            </>
+          )}
         </Flex>
       </ModalContent>
     </>

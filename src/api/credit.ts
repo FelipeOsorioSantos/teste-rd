@@ -42,11 +42,14 @@ export const postCreateLoan = async (params: ICreateLoan) => {
     const response = { data: data.data, status: data.status, message: '' };
     return response;
   } catch (error: any) {
+    const cause = error?.response?.data?.message?.response?.cause || '';
+    const errorMessage = `${error?.response?.data?.message?.response?.error} ${cause}`;
     const response = {
-      error: error,
-      message: error?.response.data.message.message || '',
+      error: !!error,
+      message: errorMessage || '',
       status: error?.response.status,
     };
+
     return response;
   }
 };

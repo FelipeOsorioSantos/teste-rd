@@ -16,7 +16,7 @@ import { AppInput } from '../../_app/AppInput';
 import { AppSelect } from '../../_app/AppSelect';
 import { ModalPolitica } from '../modals/ModalPolitica';
 import { ModalSCR } from '../modals/ModalSCR';
-import { ModalSubmit, SubmitingStatus } from '../modals/ModalSubmit';
+import { ModalSubmit, SubmitStatus } from '../modals/ModalSubmit';
 import { ModalTermos } from '../modals/ModalTermos';
 import { validacaoAnaliseCredito } from '../validation';
 
@@ -28,10 +28,11 @@ const authOptionsInitial = {
 };
 
 // initial error/loading status for submit modal
-const submitingStatusInicial: SubmitingStatus = {
+const submitStatusInicial: SubmitStatus = {
   message: '',
   error: false,
   loading: false,
+  status: 0,
 };
 
 //options for vinculos
@@ -58,9 +59,8 @@ const vinculosOptions = [
 export const Analise2 = () => {
   //states
   const [authOptions, setAuthOptions] = useState(authOptionsInitial);
-  const [submitingStatus, setSubmitingStatus] = useState<SubmitingStatus>(
-    submitingStatusInicial,
-  );
+  const [submitStatus, setSubmitStatus] =
+    useState<SubmitStatus>(submitStatusInicial);
 
   //stores
   const { setAnaliseCreditoStep, analiseCreditoForm } =
@@ -118,21 +118,26 @@ export const Analise2 = () => {
       applicant_vinculo: formLog.vinculo,
     };
 
-    setSubmitingStatus({ message: '', error: false, loading: true });
+    setSubmitStatus({
+      ...submitStatusInicial,
+      loading: true,
+    });
     submitModal.onOpen();
+
     const response = await postCreateLoan(submitObj);
-    if (response.status === 500) {
-      setSubmitingStatus({
-        message: response.message,
-        error: true,
-        loading: false,
-      });
-    } else
-      setSubmitingStatus({
-        message: 'Solicitação enviada com sucesso!',
-        error: false,
-        loading: false,
-      });
+    setSubmitStatus({ ...response, loading: false });
+    // if (response.status === 500) {
+    //   setSubmitingStatus({
+    //     message: response.message,
+    //     error: true,
+    //     loading: false,
+    //   });
+    // } else
+    //   setSubmitingStatus({
+    //     message: 'Solicitação enviada com sucesso!',
+    //     error: false,
+    //     loading: false,
+    //   });
   };
 
   const handleGoBack = () => {
@@ -457,7 +462,7 @@ export const Analise2 = () => {
         >
           <ModalSubmit
             onClose={submitModal.onClose}
-            submitingStatus={submitingStatus}
+            submitStatus={submitStatus}
           />
         </Modal>
 
