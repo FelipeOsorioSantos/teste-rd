@@ -3,12 +3,17 @@ import {
   Flex,
   ModalContent,
   ModalOverlay,
+  ModalCloseButton,
   Text,
+  Progress,
+  Image,
 } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { useAnaliseCreditoStore } from '../../../store/useAnaliseCreditoStore';
 import { DynamicIcon } from '../../DynamicIcon';
 import { AppLottiePlayer } from '../../_app/AppLottiePlayer';
+import { CloseIcon } from '@chakra-ui/icons';
 
 // const testSubmitStatus = {
 //   message: '',
@@ -30,6 +35,8 @@ interface ModalSubmitProps {
 export const ModalSubmit = ({ onClose, submitStatus }: ModalSubmitProps) => {
   const isLargerThan768 = useWindowSize();
   const { setAnaliseCreditoStep } = useAnaliseCreditoStore();
+  let [progressValue, setProgressValue] = useState<number>(0);
+  const [reachedFinal, setReachState] = useState<boolean>(false);
 
   const handleSuccessCloseModal = () => {
     onClose();
@@ -39,6 +46,34 @@ export const ModalSubmit = ({ onClose, submitStatus }: ModalSubmitProps) => {
   const handleFailCloseModal = () => {
     onClose();
   };
+
+  useEffect(() => {
+    let timer = setInterval(() => {
+      if (progressValue <= 95) {
+        setProgressValue(progressValue++);
+      } else {
+        setReachState(true);
+        clearInterval(timer);
+      }
+    }, 300);
+  }, []);
+
+  // useEffect(() => {
+  //   console.log('A');
+  //   const interval = setInterval(() => {
+  //     // console.log('INTERVAL');
+  //     if (progressValue <= 25) {
+  //       setProgressValue((prevValue) => prevValue + 0.5);
+  //     }
+  //     if (progressValue > 25 && progressValue < 75) {
+  //       setProgressValue((prevValue) => prevValue + 0.25);
+  //     }
+  //     if (progressValue >= 75 && progressValue < 90) {
+  //       setProgressValue((prevValue) => prevValue + 0.1);
+  //     }
+  //   }, 100);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <>
@@ -55,13 +90,49 @@ export const ModalSubmit = ({ onClose, submitStatus }: ModalSubmitProps) => {
         <Flex p="28px" direction="column" alignItems="center" gap="16px">
           {submitStatus?.loading === true && (
             <>
-              <Text as="strong">Enviando dados...</Text>
               <Flex>
-                <AppLottiePlayer src="spinner.json" />
+                {/* <AppLottiePlayer src="spinner.json" /> */}
+                <Flex
+                  p="28px"
+                  direction="column"
+                  alignItems="center"
+                  gap="16px"
+                >
+                  <Text as="strong" fontSize={'20px'} textAlign="left">
+                    Aguarde enquanto analisamos seus dados
+                  </Text>
+                  {!reachedFinal ? (
+                    <Flex
+                      direction="row"
+                      alignItems="center"
+                      gap="16px"
+                      justifyContent={'space-between'}
+                      w={'100%'}
+                    >
+                      <Text fontSize={'16px'}>Verificando...</Text>
+                      <Text fontSize={'16px'}>{progressValue.toFixed()}%</Text>
+                    </Flex>
+                  ) : (
+                    <Flex alignItems="center" justifyContent="center">
+                      <Text fontSize={'16px'}>Só mais um momento...</Text>
+                    </Flex>
+                  )}
+                  <Progress
+                    value={progressValue}
+                    size="xs"
+                    colorScheme="pink"
+                    height={'8px'}
+                    width={'100%'}
+                    borderRadius={'8px'}
+                    isIndeterminate={reachedFinal ? true : false}
+                  />
+                  <Text fontSize={'14px'} pt={'8px'} textColor={'grey'}>
+                    Isso pode levar alguns segundos
+                  </Text>
+                </Flex>
               </Flex>
             </>
           )}
-
           {submitStatus?.loading === false && submitStatus.status === 201 && (
             <>
               <Flex color="primary.base">
@@ -89,8 +160,12 @@ export const ModalSubmit = ({ onClose, submitStatus }: ModalSubmitProps) => {
           )}
           {submitStatus?.loading === false && submitStatus?.error === true && (
             <>
-              <Flex color="primary.base">
-                <DynamicIcon icon="close" />
+              <Flex
+                color="primary.base"
+                cursor="pointer"
+                onClick={() => onClose()}
+              >
+                <CloseIcon color="primary.base" />
               </Flex>
               <Text>{submitStatus.message}</Text>
               <Text fontSize="14px">
