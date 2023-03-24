@@ -1,7 +1,7 @@
 import { Button, Flex, Modal, Text, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { debounce } from 'lodash';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { postCreateLoan } from '../../../api/credit';
 import { useWindowSize } from '../../../hooks/useWindowSize';
@@ -111,6 +111,7 @@ export const Analise2 = () => {
         monthly_revenue: unmaskCurrency(formLog.faturamento_mensal),
         responsible_cpf: formLog.cpf,
         responsible_name: formLog.nome,
+        executive_name: formLog.nome_executivo ? formLog.nome_executivo : null,
       },
       loan_value: analiseCreditoForm!.valor,
       loan_term: 24,
@@ -143,6 +144,10 @@ export const Analise2 = () => {
   const handleGoBack = () => {
     setAnaliseCreditoStep(1);
   };
+
+  // useEffect(() => {
+  //   submitModal.onOpen();
+  // });
 
   return (
     <Flex maxH="100vh" py="32px">
@@ -360,6 +365,33 @@ export const Analise2 = () => {
           />
 
           {/*fim*/}
+        </Flex>
+
+        {/*executivo*/}
+        <Text as="strong" mt="24px">
+          Foi indicado por um executivo Shopbanx?
+        </Text>
+        <Flex direction="column" gap="16px" mt="16px" mb="8px">
+          <AppInput
+            maxLength={250}
+            type="text"
+            bgColor="white"
+            errorColor="error.base"
+            borderColor="neutral.dark"
+            labelColor="content.dark"
+            placeholder="Digite aqui o nome do executivo (opcional)"
+            _placeholder={{
+              opacity: 0.4,
+            }}
+            {...register('nome_executivo')}
+            errors={errors['nome_executivo']}
+            label="Nome do executivo"
+            name="nome_executivo"
+            onChange={(e) => {
+              setValue('nome_executivo', e.target.value);
+              debouncedValidate('nome_executivo');
+            }}
+          />
         </Flex>
 
         {/*checkbox options*/}

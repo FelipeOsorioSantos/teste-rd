@@ -24,6 +24,7 @@ export interface ICreatePJ {
   responsible_name: string;
   responsible_cpf: string;
   email: string;
+  executive_name?: string;
 }
 
 export interface ICreateLoan {
