@@ -1,7 +1,7 @@
 import { Button, Flex, Modal, Text, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { debounce } from 'lodash';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { postCreateLoan } from '../../../api/credit';
 import { useWindowSize } from '../../../hooks/useWindowSize';
@@ -84,7 +84,6 @@ export const Analise2 = () => {
   const politicaModal = useDisclosure();
   const termosModal = useDisclosure();
 
-  // form logic
   const formLog = watch();
   const hasAcceptedEverything = Object.values(authOptions).every(
     (x) => x !== false,
