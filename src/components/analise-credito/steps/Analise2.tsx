@@ -526,7 +526,7 @@ export const Analise2 = () => {
           _hover={{
             bgColor: 'primary.dark',
           }}
-          disabled={formDisabled}
+          isDisabled={formDisabled}
           id="continuar"
         >
           <Text as="strong">Continuar</Text>
