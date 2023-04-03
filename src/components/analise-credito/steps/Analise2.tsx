@@ -368,7 +368,7 @@ export const Analise2 = () => {
 
         {/*executivo*/}
         <Text as="strong" mt="24px">
-          Foi indicado por um executivo Shopbanx?
+          Foi auxiliado por um executivo Shopbanx?
         </Text>
         <Flex direction="column" gap="16px" mt="16px" mb="8px">
           <AppInput
