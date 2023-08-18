@@ -41,6 +41,13 @@ export const AppSeo = ({
       <meta name="url" content={url} />
       <meta property="og:url" content={url} />
       <meta property="twitter:url" content={url} />
+
+      {/*url*/}
+      <script
+        type="text/javascript"
+        async
+        src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/3aaf7eb6-b57a-4880-8b1c-6ec962e16c59-loader.js"
+      ></script>
     </Head>
   );
 };
