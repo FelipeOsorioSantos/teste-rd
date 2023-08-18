@@ -1,7 +1,7 @@
 import { Button, Flex, Modal, Text, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { debounce } from 'lodash';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { postCreateLoan } from '../../../api/credit';
 import { useWindowSize } from '../../../hooks/useWindowSize';
@@ -76,6 +76,15 @@ export const Analise2 = () => {
     setValue,
   } = useForm({
     resolver: yupResolver(validacaoAnaliseCredito),
+  });
+
+  //rdSCript
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src =
+      'https://d335.cloudfront.net/js/loader-scripts/809c4587-2f49-4369-loader.js';
+    script.async = true;
+    document.body.appendChild(script);
   });
 
   //modals
