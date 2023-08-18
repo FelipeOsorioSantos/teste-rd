@@ -85,7 +85,7 @@ export const Analise2 = () => {
       'https://d335.cloudfront.net/js/loader-scripts/809c4587-2f49-4369-loader.js';
     script.async = true;
     document.body.appendChild(script);
-  });
+  }, []);
 
   //modals
   const submitModal = useDisclosure();
