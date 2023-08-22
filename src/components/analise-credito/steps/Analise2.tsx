@@ -114,6 +114,8 @@ export const Analise2 = () => {
         commercial_phone: formLog.celular,
         company_name: formLog.nome_empresa,
         email: formLog.email_empresa,
+        facebook: formLog.facebook_empresa,
+        instagram:  formLog.instagram_empresa,
         fantasy_name: formLog.fantasia_empresa,
         foundation_year: formLog.data_fundacao,
         monthly_revenue: unmaskCurrency(formLog.faturamento_mensal),
@@ -289,6 +291,50 @@ export const Analise2 = () => {
               * Comprovado em conta PJ.
             </Text>
           </Flex>
+
+           {/*empresa instagram*/}
+           <AppInput
+            maxLength={250}
+            type="text"
+            bgColor="white"
+            errorColor="error.base"
+            borderColor="neutral.dark"
+            labelColor="content.dark"
+            placeholder="Digite aqui (Opcional)"
+            _placeholder={{
+              opacity: 0.4,
+            }}
+            {...register('instagram_empresa')}
+            errors={errors['instagram_empresa']}
+            onChange={(e) => {
+              setValue('instagram_empresa', e.target.value);
+              debouncedValidate('instagram_empresa');
+            }}
+            label="Instagram"
+            name="instagram_empresa"
+          />
+
+          {/*facebook instagram*/}
+          <AppInput
+            maxLength={250}
+            type="text"
+            bgColor="white"
+            errorColor="error.base"
+            borderColor="neutral.dark"
+            labelColor="content.dark"
+            placeholder="Digite aqui (Opcional)"
+            _placeholder={{
+              opacity: 0.4,
+            }}
+            {...register('facebook_empresa')}
+            errors={errors['facebook_empresa']}
+            onChange={(e) => {
+              setValue('facebook_empresa', e.target.value);
+              debouncedValidate('facebook_empresa');
+            }}
+            label="Facebook"
+            name="facebook_empresa"
+          />
           {/*fim*/}
         </Flex>
 
