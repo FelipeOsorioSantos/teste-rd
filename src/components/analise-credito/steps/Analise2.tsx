@@ -93,7 +93,6 @@ export const Analise2 = () => {
   const politicaModal = useDisclosure();
   const termosModal = useDisclosure();
 
-  // form logic
   const formLog = watch();
   const hasAcceptedEverything = Object.values(authOptions).every(
     (x) => x !== false,
@@ -115,11 +114,14 @@ export const Analise2 = () => {
         commercial_phone: formLog.celular,
         company_name: formLog.nome_empresa,
         email: formLog.email_empresa,
+        facebook: formLog.facebook_empresa,
+        instagram:  formLog.instagram_empresa,
         fantasy_name: formLog.fantasia_empresa,
         foundation_year: formLog.data_fundacao,
         monthly_revenue: unmaskCurrency(formLog.faturamento_mensal),
         responsible_cpf: formLog.cpf,
         responsible_name: formLog.nome,
+        executive_name: formLog.nome_executivo ? formLog.nome_executivo : null,
       },
       loan_value: analiseCreditoForm!.valor,
       loan_term: 24,
@@ -152,6 +154,10 @@ export const Analise2 = () => {
   const handleGoBack = () => {
     setAnaliseCreditoStep(1);
   };
+
+  // useEffect(() => {
+  //   submitModal.onOpen();
+  // });
 
   return (
     <Flex maxH="100vh" py="32px">
@@ -285,6 +291,50 @@ export const Analise2 = () => {
               * Comprovado em conta PJ.
             </Text>
           </Flex>
+
+           {/*empresa instagram*/}
+           <AppInput
+            maxLength={250}
+            type="text"
+            bgColor="white"
+            errorColor="error.base"
+            borderColor="neutral.dark"
+            labelColor="content.dark"
+            placeholder="Digite aqui (Opcional)"
+            _placeholder={{
+              opacity: 0.4,
+            }}
+            {...register('instagram_empresa')}
+            errors={errors['instagram_empresa']}
+            onChange={(e) => {
+              setValue('instagram_empresa', e.target.value);
+              debouncedValidate('instagram_empresa');
+            }}
+            label="Instagram"
+            name="instagram_empresa"
+          />
+
+          {/*facebook instagram*/}
+          <AppInput
+            maxLength={250}
+            type="text"
+            bgColor="white"
+            errorColor="error.base"
+            borderColor="neutral.dark"
+            labelColor="content.dark"
+            placeholder="Digite aqui (Opcional)"
+            _placeholder={{
+              opacity: 0.4,
+            }}
+            {...register('facebook_empresa')}
+            errors={errors['facebook_empresa']}
+            onChange={(e) => {
+              setValue('facebook_empresa', e.target.value);
+              debouncedValidate('facebook_empresa');
+            }}
+            label="Facebook"
+            name="facebook_empresa"
+          />
           {/*fim*/}
         </Flex>
 
@@ -369,6 +419,33 @@ export const Analise2 = () => {
           />
 
           {/*fim*/}
+        </Flex>
+
+        {/*executivo*/}
+        <Text as="strong" mt="24px">
+          Foi auxiliado por um executivo Shopbanx?
+        </Text>
+        <Flex direction="column" gap="16px" mt="16px" mb="8px">
+          <AppInput
+            maxLength={250}
+            type="text"
+            bgColor="white"
+            errorColor="error.base"
+            borderColor="neutral.dark"
+            labelColor="content.dark"
+            placeholder="Digite aqui o nome do executivo (opcional)"
+            _placeholder={{
+              opacity: 0.4,
+            }}
+            {...register('nome_executivo')}
+            errors={errors['nome_executivo']}
+            label="Nome do executivo"
+            name="nome_executivo"
+            onChange={(e) => {
+              setValue('nome_executivo', e.target.value);
+              debouncedValidate('nome_executivo');
+            }}
+          />
         </Flex>
 
         {/*checkbox options*/}
@@ -503,7 +580,7 @@ export const Analise2 = () => {
           _hover={{
             bgColor: 'primary.dark',
           }}
-          disabled={formDisabled}
+          isDisabled={formDisabled}
           id="continuar"
         >
           <Text as="strong">Continuar</Text>
