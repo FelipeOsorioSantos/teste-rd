@@ -84,7 +84,6 @@ export const Analise1 = () => {
     }
   }
   const isOutrosSelected = selectedOption.id === 'outros';
-  console.log(value);
   return (
     <Flex
       maxW={isLargerThan768 ? '384px' : '100%'}
