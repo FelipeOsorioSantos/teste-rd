@@ -66,7 +66,8 @@ export const Analise1 = () => {
     isUnder10k || value === '0,00' || selectedOption.desc.length < 4;
 
   const handleSubmit = () => {
-    if (Number(value) < 10000) {
+    const valueNumber = value.replace('.','').replace(',', '.')
+    if (parseFloat(valueNumber) >= 10000) {
       setAllowed(false);
       setAnaliseCreditoForm({
         valor: unmaskCurrency(value),
