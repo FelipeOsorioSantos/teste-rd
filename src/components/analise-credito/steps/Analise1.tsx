@@ -31,7 +31,7 @@ export const Analise1 = () => {
   const { setAnaliseCreditoForm, setAnaliseCreditoStep } =
     useAnaliseCreditoStore();
   const [value, setValue] = useState<string>('10.000,00');
-
+  const [allowed, setAllowed] = useState(false);
   const [selectedOption, setSelectedOption] = useState<{
     id: string;
     desc: string;
@@ -43,6 +43,7 @@ export const Analise1 = () => {
         const result = (unmaskCurrency(prev) + 1000) * 100;
         return maskCurrency(result.toFixed());
       });
+      checkValue(value);
     } else if (method === 'subtract' && unmaskCurrency(value) > 10000) {
       setValue((prev) => {
         const result = (unmaskCurrency(prev) - 1000) * 100;
@@ -50,8 +51,14 @@ export const Analise1 = () => {
           return maskCurrency('0,00');
         } else return maskCurrency(result.toFixed());
       });
+      checkValue(value);
     }
   };
+
+  function handleValueChange(value: string) {
+    checkValue(value);
+    setValue(maskCurrency(value));
+  }
 
   const isUnder10k = unmaskCurrency(value) < 10000;
 
@@ -59,15 +66,24 @@ export const Analise1 = () => {
     isUnder10k || value === '0,00' || selectedOption.desc.length < 4;
 
   const handleSubmit = () => {
-    setAnaliseCreditoForm({
-      valor: unmaskCurrency(value),
-      motivo: selectedOption.desc,
-    });
-    setAnaliseCreditoStep(2);
+    if (Number(value) < 10000) {
+      setAllowed(false);
+      setAnaliseCreditoForm({
+        valor: unmaskCurrency(value),
+        motivo: selectedOption.desc,
+      });
+      setAnaliseCreditoStep(2);
+    }
   };
 
+  function checkValue(value: string) {
+    if (Number(value) < 10000) {
+      setAllowed(false);
+    } else {
+      setAllowed(true);
+    }
+  }
   const isOutrosSelected = selectedOption.id === 'outros';
-
   return (
     <Flex
       maxW={isLargerThan768 ? '384px' : '100%'}
@@ -128,7 +144,7 @@ export const Analise1 = () => {
                 _focusVisible={{ border: 'none' }}
                 value={value || '0.00'}
                 onChange={(e) => {
-                  setValue(maskCurrency(e.target.value));
+                  handleValueChange(e.target.value);
                 }}
               />
             </Flex>
@@ -202,7 +218,8 @@ export const Analise1 = () => {
         _hover={{
           bgColor: 'primary.dark',
         }}
-        disabled={formDisabled}
+        // disabled={formDisabled}
+        isDisabled={formDisabled}
         id="simule"
       >
         <Text as="strong">Simule</Text>

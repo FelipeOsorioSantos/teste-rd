@@ -5,10 +5,7 @@ export const axiosCEP = axios.create({
 });
 
 export const axiosConnection = axios.create({
-  baseURL:
-    process.env.BACK_ENV === 'development'
-      ? process.env.API_GATEWAY_LOCAL
-      : process.env.API_GATEWAY_URL,
+  baseURL: process.env.API_GATEWAY_URL,
 });
 
 export const ipApi = axios.create({
