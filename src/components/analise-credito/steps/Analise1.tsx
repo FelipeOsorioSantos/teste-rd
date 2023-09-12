@@ -6,6 +6,8 @@ import { maskCurrency, unmaskCurrency } from '../../../utils/mask-currency';
 import { LogoShopbanx } from '../../LogoShopbanx';
 import { AppInput } from '../../_app/AppInput';
 import { AppRadio } from '../../_app/AppRadio';
+import { LogoJusta } from '../../LogoJusta';
+import { useRouter } from 'next/router';
 
 const options = [
   {
@@ -28,6 +30,8 @@ const options = [
 ];
 
 export const Analise1 = () => {
+  const router = useRouter();
+
   const { setAnaliseCreditoForm, setAnaliseCreditoStep } =
     useAnaliseCreditoStore();
   const [value, setValue] = useState<string>('10.000,00');
@@ -84,6 +88,8 @@ export const Analise1 = () => {
       setAllowed(true);
     }
   }
+  const colorDark = router.pathname == '/justa'? '#004378': 'primary.dark'
+  const colorBase = router.pathname == '/justa' ? '#004378' : 'primary.base'
   const isOutrosSelected = selectedOption.id === 'outros';
   return (
     <Flex
@@ -96,19 +102,45 @@ export const Analise1 = () => {
       mt={isLargerThan768 ? '0px' : '72px'}
       p="24px"
     >
-      <LogoShopbanx />
+      {router.pathname == '/justa' 
+        ?
+          <LogoJusta />
+        : <LogoShopbanx />
+      }
       {/*title*/}
+      {router.pathname == '/justa' ? 
+      
+      <Flex flexDir={'column'}>
+        <Text
+          mt={isLargerThan768 ? '0px' : '24px'}
+          as="strong"
+          fontSize={isLargerThan768 ? '20px' : '28px'}
+          lineHeight="120%"
+          color={colorDark}
+        >
+          Juntas para oferecer crédito de uma forma simples, rápida e sem burocracia!
+        </Text>
+        <Text
+          mt={'16px'}
+          fontSize={'20px'}
+          lineHeight="120%"
+          color={colorDark}
+        >
+          Simule uma avaliação de crédito e receba uma proposta!
+        </Text>
+      </Flex> : 
       <Flex>
         <Text
           mt={isLargerThan768 ? '0px' : '24px'}
           as="strong"
           fontSize={isLargerThan768 ? '20px' : '28px'}
           lineHeight="120%"
-          color="primary.dark"
+          color={colorDark}
         >
           Simule uma avaliação de crédito e receba sua proposta!
         </Text>
       </Flex>
+      }
 
       {/*form options*/}
       <Flex direction="column">
@@ -116,7 +148,7 @@ export const Analise1 = () => {
         <Flex
           mt={isLargerThan768 ? '16px' : '56px'}
           direction="column"
-          bg="primary.dark"
+          bg={colorDark}
           borderRadius="8px"
           color="white"
           p="16px"
@@ -174,7 +206,7 @@ export const Analise1 = () => {
           {options.map((o) => (
             <Flex key={`${o.id}`} alignItems="center" gap="4px">
               <AppRadio
-                borderColor="primary.dark"
+                borderColor={colorDark}
                 selected={o === selectedOption}
                 onClick={() => setSelectedOption(o)}
               />
@@ -184,7 +216,7 @@ export const Analise1 = () => {
           <Flex direction="column" gap="8px">
             <Flex alignItems="center" gap="4px">
               <AppRadio
-                borderColor="primary.dark"
+                borderColor={colorDark}
                 selected={isOutrosSelected}
                 onClick={() => setSelectedOption({ id: 'outros', desc: '' })}
               />
@@ -210,14 +242,14 @@ export const Analise1 = () => {
       <Button
         mt="32px"
         w="100%"
-        bgColor="primary.base"
+        bgColor={colorBase}
         color="white"
         fontSize="14px"
         borderRadius={8}
         gap="8px"
         onClick={() => handleSubmit()}
         _hover={{
-          bgColor: 'primary.dark',
+          bgColor: colorDark,
         }}
         // disabled={formDisabled}
         isDisabled={formDisabled}
