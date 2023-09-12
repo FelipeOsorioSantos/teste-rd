@@ -141,7 +141,7 @@ export const Analise2 = () => {
       loading: true,
     });
     submitModal.onOpen();
-
+    
     const response = await postCreateLoan(submitObj);
     setSubmitStatus({ ...response, loading: false });
     // if (response.status === 500) {
@@ -442,7 +442,7 @@ export const Analise2 = () => {
         <Text as="strong" mt="24px">
           Foi auxiliado por um executivo Shopbanx?
         </Text>
-        {router.pathname == '/justa' &&
+        {router.pathname != '/justa' &&
           <Flex direction="column" gap="16px" mt="16px" mb="8px">
             <AppInput
               maxLength={250}
