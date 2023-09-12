@@ -1,4 +1,4 @@
-import { Button, Flex, Modal, Text, useDisclosure } from '@chakra-ui/react';
+import { Button, Flex, Image, Modal, Text, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
@@ -19,6 +19,7 @@ import { ModalSCR } from '../modals/ModalSCR';
 import { ModalSubmit, SubmitStatus } from '../modals/ModalSubmit';
 import { ModalTermos } from '../modals/ModalTermos';
 import { validacaoAnaliseCredito } from '../validation';
+import { useRouter } from 'next/router';
 
 // initial state for checkbox
 const authOptionsInitial = {
@@ -57,6 +58,8 @@ const vinculosOptions = [
 ];
 
 export const Analise2 = () => {
+  const router = useRouter();
+
   //states
   const [authOptions, setAuthOptions] = useState(authOptionsInitial);
   const [submitStatus, setSubmitStatus] =
@@ -121,7 +124,11 @@ export const Analise2 = () => {
         monthly_revenue: unmaskCurrency(formLog.faturamento_mensal),
         responsible_cpf: formLog.cpf,
         responsible_name: formLog.nome,
-        executive_name: formLog.nome_executivo ? formLog.nome_executivo : null,
+        executive_name: formLog.nome_executivo 
+          ? formLog.nome_executivo 
+          : router.pathname == '/justa' 
+            ? 'Justa' 
+            : null,
       },
       loan_value: analiseCreditoForm!.valor,
       loan_term: 24,
@@ -158,6 +165,8 @@ export const Analise2 = () => {
   // useEffect(() => {
   //   submitModal.onOpen();
   // });
+  const colorDark = router.pathname == '/justa'? '#004378': 'primary.dark'
+  const colorBase = router.pathname == '/justa' ? '#004378' : 'primary.base'
 
   return (
     <Flex maxH="100vh" py="32px">
@@ -178,7 +187,15 @@ export const Analise2 = () => {
           scrollbarWidth: 'none' /* Firefox */,
         }}
       >
-        <LogoShopbanx />
+      {router.pathname == '/justa' ?
+        <Flex gap={4}>
+          <Flex maxW="35%" mb="16px">
+            <Image src="./images/Logo_Justa.png" alt="Logotipo Justa" />
+          </Flex>
+          <LogoShopbanx />
+        </Flex> :
+          <LogoShopbanx />
+      }
 
         {/*titulo*/}
         <Flex>
@@ -186,7 +203,7 @@ export const Analise2 = () => {
             as="strong"
             fontSize={isLargerThan768 ? '20px' : '16px'}
             lineHeight="120%"
-            color="primary.dark"
+            color={colorDark}
           >
             Complete seus dados de cadastro
           </Text>
@@ -425,36 +442,38 @@ export const Analise2 = () => {
         <Text as="strong" mt="24px">
           Foi auxiliado por um executivo Shopbanx?
         </Text>
-        <Flex direction="column" gap="16px" mt="16px" mb="8px">
-          <AppInput
-            maxLength={250}
-            type="text"
-            bgColor="white"
-            errorColor="error.base"
-            borderColor="neutral.dark"
-            labelColor="content.dark"
-            placeholder="Digite aqui o nome do executivo (opcional)"
-            _placeholder={{
-              opacity: 0.4,
-            }}
-            {...register('nome_executivo')}
-            errors={errors['nome_executivo']}
-            label="Nome do executivo"
-            name="nome_executivo"
-            onChange={(e) => {
-              setValue('nome_executivo', e.target.value);
-              debouncedValidate('nome_executivo');
-            }}
-          />
-        </Flex>
+        {router.pathname == '/justa' &&
+          <Flex direction="column" gap="16px" mt="16px" mb="8px">
+            <AppInput
+              maxLength={250}
+              type="text"
+              bgColor="white"
+              errorColor="error.base"
+              borderColor="neutral.dark"
+              labelColor="content.dark"
+              placeholder="Digite aqui o nome do executivo (opcional)"
+              _placeholder={{
+                opacity: 0.4,
+              }}
+              {...register('nome_executivo')}
+              errors={errors['nome_executivo']}
+              label="Nome do executivo"
+              name="nome_executivo"
+              onChange={(e) => {
+                setValue('nome_executivo', e.target.value);
+                debouncedValidate('nome_executivo');
+              }}
+            />
+          </Flex>
+        }
 
         {/*checkbox options*/}
         <Flex direction="column" mt="16px" gap="16px">
           {/*politica*/}
           <Flex gap="8px">
             <AppCheckbox
-              borderColor="primary.base"
-              bgColorSelected="primary.base"
+              borderColor={colorBase}
+              bgColorSelected={colorBase}
               iconColor="white"
               selected={authOptions.authPolicy}
               onClick={() =>
@@ -468,7 +487,7 @@ export const Analise2 = () => {
               Li e concordo com a{' '}
               <Text
                 as="span"
-                color="primary.dark"
+                color={colorDark}
                 cursor="pointer"
                 onClick={politicaModal.onOpen}
               >
@@ -481,8 +500,8 @@ export const Analise2 = () => {
           {/*termos*/}
           <Flex gap="8px">
             <AppCheckbox
-              borderColor="primary.base"
-              bgColorSelected="primary.base"
+              borderColor={colorBase}
+              bgColorSelected={colorBase}
               iconColor="white"
               selected={authOptions.authTerms}
               onClick={() =>
@@ -496,7 +515,7 @@ export const Analise2 = () => {
               Li e concordo com os{' '}
               <Text
                 as="span"
-                color="primary.dark"
+                color={colorDark}
                 cursor="pointer"
                 onClick={termosModal.onOpen}
               >
@@ -509,8 +528,8 @@ export const Analise2 = () => {
           {/*scr*/}
           <Flex gap="8px">
             <AppCheckbox
-              borderColor="primary.base"
-              bgColorSelected="primary.base"
+              borderColor={colorBase}
+              bgColorSelected={colorBase}
               iconColor="white"
               minW="16px"
               selected={authOptions.authSCR}
@@ -525,7 +544,7 @@ export const Analise2 = () => {
               Autorizo a consulta das informações presentes no{' '}
               <Text
                 as="span"
-                color="primary.dark"
+                color={colorDark}
                 cursor="pointer"
                 onClick={scrModal.onOpen}
               >
@@ -571,14 +590,14 @@ export const Analise2 = () => {
         <Button
           mt={isLargerThan768 ? '32px' : '40px'}
           w="100%"
-          bgColor="primary.base"
+          bgColor={colorBase}
           color="white"
           fontSize="14px"
           borderRadius={8}
           gap="8px"
           onClick={() => handleSubmit()}
           _hover={{
-            bgColor: 'primary.dark',
+            bgColor: {colorDark},
           }}
           isDisabled={formDisabled}
           id="continuar"
@@ -590,7 +609,7 @@ export const Analise2 = () => {
         <Button
           mt="16px"
           bgColor="neutral.white"
-          color="primary.base"
+          color={colorBase}
           border="2px solid "
           fontSize="14px"
           borderRadius={8}
@@ -603,7 +622,7 @@ export const Analise2 = () => {
           onClick={() => {
             handleGoBack();
           }}
-          _hover={{ color: 'primary.dark' }}
+          _hover={{ color: {colorDark} }}
           id="voltar_form"
         >
           <Text as="strong">Voltar</Text>
