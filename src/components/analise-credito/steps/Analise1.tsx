@@ -89,7 +89,7 @@ export const Analise1 = () => {
     }
   }
   const colorDark = router.pathname == '/justa'? '#004378': 'primary.dark'
-  const colorBase = router.pathname == '-/justa' ? '#004378' : 'primary.base'
+  const colorBase = router.pathname == '/justa' ? '#004378' : 'primary.base'
   const isOutrosSelected = selectedOption.id === 'outros';
   return (
     <Flex
