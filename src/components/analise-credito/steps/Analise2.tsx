@@ -177,120 +177,58 @@ export const Analise2 = () => {
 
   return (
     <Flex maxH="100vh" py="32px">
-      <Flex
-        w="100%"
-        maxW={isLargerThan768 ? '384px' : '100%'}
-        bg="white"
-        direction="column"
-        borderRadius="8px"
-        p="24px"
-        overflowY="scroll"
-        justifyContent={isLargerThan768 ? '' : 'space-between'}
-        sx={{
-          webkitScrollbar: {
-            display: 'none',
-          },
-          msOverflowStyle: 'none' /* IE and Edge */,
-          scrollbarWidth: 'none' /* Firefox */,
-        }}
-      >
-        {router.pathname == '/justa' ? (
-          <Flex gap={4}>
-            <Flex maxW="35%" mb="16px">
-              <Image src="./images/Logo_Justa.png" alt="Logotipo Justa" />
+      <form>
+        <Flex
+          w="100%"
+          maxW={isLargerThan768 ? '384px' : '100%'}
+          bg="white"
+          direction="column"
+          borderRadius="8px"
+          p="24px"
+          overflowY="scroll"
+          justifyContent={isLargerThan768 ? '' : 'space-between'}
+          sx={{
+            webkitScrollbar: {
+              display: 'none',
+            },
+            msOverflowStyle: 'none' /* IE and Edge */,
+            scrollbarWidth: 'none' /* Firefox */,
+          }}
+        >
+          {router.pathname == '/justa' ? (
+            <Flex gap={4}>
+              <Flex maxW="35%" mb="16px">
+                <Image src="./images/Logo_Justa.png" alt="Logotipo Justa" />
+              </Flex>
+              <LogoShopbanx />
             </Flex>
+          ) : (
             <LogoShopbanx />
+          )}
+
+          {/*titulo*/}
+          <Flex>
+            <Text
+              as="strong"
+              fontSize={isLargerThan768 ? '20px' : '16px'}
+              lineHeight="120%"
+              color={colorDark}
+            >
+              Complete seus dados de cadastro
+            </Text>
           </Flex>
-        ) : (
-          <LogoShopbanx />
-        )}
 
-        {/*titulo*/}
-        <Flex>
-          <Text
-            as="strong"
-            fontSize={isLargerThan768 ? '20px' : '16px'}
-            lineHeight="120%"
-            color={colorDark}
-          >
-            Complete seus dados de cadastro
+          {/*form options*/}
+          {/*Empresa*/}
+          <Text as="strong" mt="16px">
+            Dados da empresa
           </Text>
-        </Flex>
 
-        {/*form options*/}
-        {/*Empresa*/}
-        <Text as="strong" mt="16px">
-          Dados da empresa
-        </Text>
-
-        <Flex direction="column" gap="16px" mt="16px">
-          {/*empresa email*/}
-          <AppInput
-            maxLength={250}
-            type="email"
-            bgColor="white"
-            errorColor="error.base"
-            borderColor="neutral.dark"
-            labelColor="content.dark"
-            _placeholder={{
-              opacity: 0.4,
-            }}
-            {...register('email_empresa')}
-            errors={errors['email_empresa']}
-            onChange={(e) => {
-              setValue('email_empresa', e.target.value);
-              debouncedValidate('email_empresa');
-            }}
-            label="Email"
-            name="email_empresa"
-          />
-
-          {/*empresa cnpj*/}
-          <AppInput
-            bgColor="white"
-            errorColor="error.base"
-            borderColor="neutral.dark"
-            labelColor="content.dark"
-            _placeholder={{
-              opacity: 0.4,
-            }}
-            {...register('cnpj')}
-            errors={errors['cnpj']}
-            label="CNPJ"
-            name="cnpj"
-            maxLength={18}
-            onChange={(e) => {
-              setValue('cnpj', maskCNPJ(e.target.value));
-              debouncedValidate('cnpj');
-            }}
-          />
-
-          {/*empresa fundacao*/}
-          <AppInput
-            bgColor="white"
-            errorColor="error.base"
-            borderColor="neutral.dark"
-            labelColor="content.dark"
-            _placeholder={{
-              opacity: 0.4,
-            }}
-            {...register('data_fundacao')}
-            errors={errors['data_fundacao']}
-            label="Data de fundação"
-            name="data_fundacao"
-            maxLength={10}
-            onChange={(e) => {
-              setValue('data_fundacao', maskDate(e.target.value));
-              debouncedValidate('data_fundacao');
-            }}
-          />
-
-          {/*empresa faturamento mensal*/}
-          <Flex direction="column">
+          <Flex direction="column" gap="16px" mt="16px">
+            {/*empresa email*/}
             <AppInput
-              maxLength={20}
-              type="text"
-              currency="R$"
+              maxLength={250}
+              type="email"
               bgColor="white"
               errorColor="error.base"
               borderColor="neutral.dark"
@@ -298,160 +236,89 @@ export const Analise2 = () => {
               _placeholder={{
                 opacity: 0.4,
               }}
-              {...register('faturamento_mensal')}
-              errors={errors['faturamento_mensal']}
-              label="Faturamento mensal *"
-              name="faturamento_mensal"
+              {...register('email_empresa')}
+              errors={errors['email_empresa']}
               onChange={(e) => {
-                setValue('faturamento_mensal', maskCurrency(e.target.value));
-                debouncedValidate('faturamento_mensal');
+                setValue('email_empresa', e.target.value);
+                debouncedValidate('email_empresa');
+              }}
+              label="Email"
+              name="email_empresa"
+            />
+
+            {/*empresa cnpj*/}
+            <AppInput
+              bgColor="white"
+              errorColor="error.base"
+              borderColor="neutral.dark"
+              labelColor="content.dark"
+              _placeholder={{
+                opacity: 0.4,
+              }}
+              {...register('cnpj')}
+              errors={errors['cnpj']}
+              label="CNPJ"
+              name="cnpj"
+              maxLength={18}
+              onChange={(e) => {
+                setValue('cnpj', maskCNPJ(e.target.value));
+                debouncedValidate('cnpj');
               }}
             />
-            <Text
-              fontSize="12px"
-              opacity="0.4"
-              mt="4px"
-              color={isLargerThan768 ? 'content.dark' : 'white'}
-            >
-              * Comprovado em conta PJ.
-            </Text>
-          </Flex>
 
-          {/*empresa instagram*/}
-          <AppInput
-            maxLength={250}
-            type="text"
-            bgColor="white"
-            errorColor="error.base"
-            borderColor="neutral.dark"
-            labelColor="content.dark"
-            placeholder="Digite aqui (Opcional)"
-            _placeholder={{
-              opacity: 0.4,
-            }}
-            {...register('instagram_empresa')}
-            errors={errors['instagram_empresa']}
-            onChange={(e) => {
-              setValue('instagram_empresa', e.target.value);
-              debouncedValidate('instagram_empresa');
-            }}
-            label="Instagram"
-            name="instagram_empresa"
-          />
+            {/*empresa fundacao*/}
+            <AppInput
+              bgColor="white"
+              errorColor="error.base"
+              borderColor="neutral.dark"
+              labelColor="content.dark"
+              _placeholder={{
+                opacity: 0.4,
+              }}
+              {...register('data_fundacao')}
+              errors={errors['data_fundacao']}
+              label="Data de fundação"
+              name="data_fundacao"
+              maxLength={10}
+              onChange={(e) => {
+                setValue('data_fundacao', maskDate(e.target.value));
+                debouncedValidate('data_fundacao');
+              }}
+            />
 
-          {/*facebook instagram*/}
-          <AppInput
-            maxLength={250}
-            type="text"
-            bgColor="white"
-            errorColor="error.base"
-            borderColor="neutral.dark"
-            labelColor="content.dark"
-            placeholder="Digite aqui (Opcional)"
-            _placeholder={{
-              opacity: 0.4,
-            }}
-            {...register('facebook_empresa')}
-            errors={errors['facebook_empresa']}
-            onChange={(e) => {
-              setValue('facebook_empresa', e.target.value);
-              debouncedValidate('facebook_empresa');
-            }}
-            label="Facebook"
-            name="facebook_empresa"
-          />
-          {/*fim*/}
-        </Flex>
+            {/*empresa faturamento mensal*/}
+            <Flex direction="column">
+              <AppInput
+                maxLength={20}
+                type="text"
+                currency="R$"
+                bgColor="white"
+                errorColor="error.base"
+                borderColor="neutral.dark"
+                labelColor="content.dark"
+                _placeholder={{
+                  opacity: 0.4,
+                }}
+                {...register('faturamento_mensal')}
+                errors={errors['faturamento_mensal']}
+                label="Faturamento mensal *"
+                name="faturamento_mensal"
+                onChange={(e) => {
+                  setValue('faturamento_mensal', maskCurrency(e.target.value));
+                  debouncedValidate('faturamento_mensal');
+                }}
+              />
+              <Text
+                fontSize="12px"
+                opacity="0.4"
+                mt="4px"
+                color={isLargerThan768 ? 'content.dark' : 'white'}
+              >
+                * Comprovado em conta PJ.
+              </Text>
+            </Flex>
 
-        {/*solicitante*/}
-        <Text as="strong" mt="16px">
-          Dados do solicitante
-        </Text>
-        <Flex direction="column" gap="16px" mt="16px">
-          {/*solicitante nome*/}
-          <AppInput
-            maxLength={250}
-            type="text"
-            bgColor="white"
-            errorColor="error.base"
-            borderColor="neutral.dark"
-            labelColor="content.dark"
-            placeholder="Nome completo"
-            _placeholder={{
-              opacity: 0.4,
-            }}
-            {...register('nome')}
-            errors={errors['nome']}
-            label="Nome"
-            name="nome"
-            onChange={(e) => {
-              setValue('nome', e.target.value);
-              debouncedValidate('nome');
-            }}
-          />
-
-          {/*solicitante celular*/}
-          <AppInput
-            autoComplete="off"
-            bgColor="white"
-            errorColor="error.base"
-            borderColor="neutral.dark"
-            labelColor="content.dark"
-            placeholder="(11) 91234-5678"
-            _placeholder={{
-              opacity: 0.4,
-            }}
-            {...register('celular')}
-            errors={errors['celular']}
-            label="Celular"
-            name="celular"
-            onChange={(e) => {
-              setValue('celular', maskPhone(e.target.value));
-              debouncedValidate('celular');
-            }}
-            maxLength={15}
-          />
-
-          {/*solicitante cpf*/}
-          <AppInput
-            bgColor="white"
-            errorColor="error.base"
-            borderColor="neutral.dark"
-            labelColor="content.dark"
-            placeholder="123.456.768-99"
-            _placeholder={{
-              opacity: 0.4,
-            }}
-            {...register('cpf')}
-            errors={errors['cpf']}
-            label="CPF"
-            name="cpf"
-            onChange={(e) => {
-              setValue('cpf', maskCPF(e.target.value));
-              debouncedValidate('cpf');
-            }}
-          />
-
-          {/*solicitante vinculo*/}
-          <AppSelect
-            placeholder="Escolha um..."
-            label="Vínculo com a empresa"
-            options={vinculosOptions}
-            onChange={(value) => {
-              setValue('vinculo', value.value);
-              debouncedValidate('vinculo');
-            }}
-          />
-
-          {/*fim*/}
-        </Flex>
-
-        {/*executivo*/}
-        <Text as="strong" mt="24px">
-          Foi auxiliado por um executivo Shopbanx?
-        </Text>
-        {router.pathname != '/justa' && (
-          <Flex direction="column" gap="16px" mt="16px" mb="8px">
+            {/*empresa instagram*/}
             <AppInput
               maxLength={250}
               type="text"
@@ -459,183 +326,319 @@ export const Analise2 = () => {
               errorColor="error.base"
               borderColor="neutral.dark"
               labelColor="content.dark"
-              placeholder="Digite aqui o nome do executivo (opcional)"
+              placeholder="Digite aqui (Opcional)"
               _placeholder={{
                 opacity: 0.4,
               }}
-              {...register('nome_executivo')}
-              errors={errors['nome_executivo']}
-              label="Nome do executivo"
-              name="nome_executivo"
+              {...register('instagram_empresa')}
+              errors={errors['instagram_empresa']}
               onChange={(e) => {
-                setValue('nome_executivo', e.target.value);
-                debouncedValidate('nome_executivo');
+                setValue('instagram_empresa', e.target.value);
+                debouncedValidate('instagram_empresa');
+              }}
+              label="Instagram"
+              name="instagram_empresa"
+            />
+
+            {/*facebook instagram*/}
+            <AppInput
+              maxLength={250}
+              type="text"
+              bgColor="white"
+              errorColor="error.base"
+              borderColor="neutral.dark"
+              labelColor="content.dark"
+              placeholder="Digite aqui (Opcional)"
+              _placeholder={{
+                opacity: 0.4,
+              }}
+              {...register('facebook_empresa')}
+              errors={errors['facebook_empresa']}
+              onChange={(e) => {
+                setValue('facebook_empresa', e.target.value);
+                debouncedValidate('facebook_empresa');
+              }}
+              label="Facebook"
+              name="facebook_empresa"
+            />
+            {/*fim*/}
+          </Flex>
+
+          {/*solicitante*/}
+          <Text as="strong" mt="16px">
+            Dados do solicitante
+          </Text>
+          <Flex direction="column" gap="16px" mt="16px">
+            {/*solicitante nome*/}
+            <AppInput
+              maxLength={250}
+              type="text"
+              bgColor="white"
+              errorColor="error.base"
+              borderColor="neutral.dark"
+              labelColor="content.dark"
+              placeholder="Nome completo"
+              _placeholder={{
+                opacity: 0.4,
+              }}
+              {...register('nome')}
+              errors={errors['nome']}
+              label="Nome"
+              name="nome"
+              onChange={(e) => {
+                setValue('nome', e.target.value);
+                debouncedValidate('nome');
               }}
             />
-          </Flex>
-        )}
 
-        {/*checkbox options*/}
-        <Flex direction="column" mt="16px" gap="16px">
-          {/*politica*/}
-          <Flex gap="8px">
-            <AppCheckbox
-              borderColor={colorBase}
-              bgColorSelected={colorBase}
-              iconColor="white"
-              selected={authOptions.authPolicy}
-              onClick={() =>
-                setAuthOptions((prev) => ({
-                  ...prev,
-                  authPolicy: !prev.authPolicy,
-                }))
-              }
+            {/*solicitante celular*/}
+            <AppInput
+              autoComplete="off"
+              bgColor="white"
+              errorColor="error.base"
+              borderColor="neutral.dark"
+              labelColor="content.dark"
+              placeholder="(11) 91234-5678"
+              _placeholder={{
+                opacity: 0.4,
+              }}
+              {...register('celular')}
+              errors={errors['celular']}
+              label="Celular"
+              name="celular"
+              onChange={(e) => {
+                setValue('celular', maskPhone(e.target.value));
+                debouncedValidate('celular');
+              }}
+              maxLength={15}
             />
-            <Text fontSize="12px" color="neutral.dark">
-              Li e concordo com a{' '}
-              <Text
-                as="span"
-                color={colorDark}
-                cursor="pointer"
-                onClick={politicaModal.onOpen}
-              >
-                Política de Privacidade
-              </Text>
-              .
-            </Text>
-          </Flex>
 
-          {/*termos*/}
-          <Flex gap="8px">
-            <AppCheckbox
-              borderColor={colorBase}
-              bgColorSelected={colorBase}
-              iconColor="white"
-              selected={authOptions.authTerms}
-              onClick={() =>
-                setAuthOptions((prev) => ({
-                  ...prev,
-                  authTerms: !prev.authTerms,
-                }))
-              }
+            {/*solicitante cpf*/}
+            <AppInput
+              bgColor="white"
+              errorColor="error.base"
+              borderColor="neutral.dark"
+              labelColor="content.dark"
+              placeholder="123.456.768-99"
+              _placeholder={{
+                opacity: 0.4,
+              }}
+              {...register('cpf')}
+              errors={errors['cpf']}
+              label="CPF"
+              name="cpf"
+              onChange={(e) => {
+                setValue('cpf', maskCPF(e.target.value));
+                debouncedValidate('cpf');
+              }}
             />
-            <Text color="neutral.dark" fontSize="12px">
-              Li e concordo com os{' '}
-              <Text
-                as="span"
-                color={colorDark}
-                cursor="pointer"
-                onClick={termosModal.onOpen}
-              >
-                Termos de Uso
-              </Text>
-              .
-            </Text>
-          </Flex>
 
-          {/*scr*/}
-          <Flex gap="8px">
-            <AppCheckbox
-              borderColor={colorBase}
-              bgColorSelected={colorBase}
-              iconColor="white"
-              minW="16px"
-              selected={authOptions.authSCR}
-              onClick={() =>
-                setAuthOptions((prev) => ({
-                  ...prev,
-                  authSCR: !prev.authSCR,
-                }))
-              }
+            {/*solicitante vinculo*/}
+            <AppSelect
+              placeholder="Escolha um..."
+              label="Vínculo com a empresa"
+              options={vinculosOptions}
+              onChange={(value) => {
+                setValue('vinculo', value.value);
+                debouncedValidate('vinculo');
+              }}
             />
-            <Text color="neutral.dark" fontSize="12px">
-              Autorizo a consulta das informações presentes no{' '}
-              <Text
-                as="span"
-                color={colorDark}
-                cursor="pointer"
-                onClick={scrModal.onOpen}
-              >
-                Sistema de Informações de Crédito (SCR)
-              </Text>
-              , bem como da minha agenda de recebíveis em qualquer sistema
-              gerido por registradoras autorizadas pelo Banco Central do Brasil.
-            </Text>
-          </Flex>
-        </Flex>
 
-        {/*modals*/}
-        {/*modal submit*/}
-        <Modal
-          isOpen={submitModal.isOpen}
-          // isOpen={true}
-          closeOnOverlayClick={false}
-          onClose={submitModal.onClose}
-          isCentered
-        >
-          <ModalSubmit
+            {/*fim*/}
+          </Flex>
+
+          {/*executivo*/}
+          <Text as="strong" mt="24px">
+            Foi auxiliado por um executivo Shopbanx?
+          </Text>
+          {router.pathname != '/justa' && (
+            <Flex direction="column" gap="16px" mt="16px" mb="8px">
+              <AppInput
+                maxLength={250}
+                type="text"
+                bgColor="white"
+                errorColor="error.base"
+                borderColor="neutral.dark"
+                labelColor="content.dark"
+                placeholder="Digite aqui o nome do executivo (opcional)"
+                _placeholder={{
+                  opacity: 0.4,
+                }}
+                {...register('nome_executivo')}
+                errors={errors['nome_executivo']}
+                label="Nome do executivo"
+                name="nome_executivo"
+                onChange={(e) => {
+                  setValue('nome_executivo', e.target.value);
+                  debouncedValidate('nome_executivo');
+                }}
+              />
+            </Flex>
+          )}
+
+          {/*checkbox options*/}
+          <Flex direction="column" mt="16px" gap="16px">
+            {/*politica*/}
+            <Flex gap="8px">
+              <AppCheckbox
+                borderColor={colorBase}
+                bgColorSelected={colorBase}
+                iconColor="white"
+                selected={authOptions.authPolicy}
+                onClick={() =>
+                  setAuthOptions((prev) => ({
+                    ...prev,
+                    authPolicy: !prev.authPolicy,
+                  }))
+                }
+              />
+              <Text fontSize="12px" color="neutral.dark">
+                Li e concordo com a{' '}
+                <Text
+                  as="span"
+                  color={colorDark}
+                  cursor="pointer"
+                  onClick={politicaModal.onOpen}
+                >
+                  Política de Privacidade
+                </Text>
+                .
+              </Text>
+            </Flex>
+
+            {/*termos*/}
+            <Flex gap="8px">
+              <AppCheckbox
+                borderColor={colorBase}
+                bgColorSelected={colorBase}
+                iconColor="white"
+                selected={authOptions.authTerms}
+                onClick={() =>
+                  setAuthOptions((prev) => ({
+                    ...prev,
+                    authTerms: !prev.authTerms,
+                  }))
+                }
+              />
+              <Text color="neutral.dark" fontSize="12px">
+                Li e concordo com os{' '}
+                <Text
+                  as="span"
+                  color={colorDark}
+                  cursor="pointer"
+                  onClick={termosModal.onOpen}
+                >
+                  Termos de Uso
+                </Text>
+                .
+              </Text>
+            </Flex>
+
+            {/*scr*/}
+            <Flex gap="8px">
+              <AppCheckbox
+                borderColor={colorBase}
+                bgColorSelected={colorBase}
+                iconColor="white"
+                minW="16px"
+                selected={authOptions.authSCR}
+                onClick={() =>
+                  setAuthOptions((prev) => ({
+                    ...prev,
+                    authSCR: !prev.authSCR,
+                  }))
+                }
+              />
+              <Text color="neutral.dark" fontSize="12px">
+                Autorizo a consulta das informações presentes no{' '}
+                <Text
+                  as="span"
+                  color={colorDark}
+                  cursor="pointer"
+                  onClick={scrModal.onOpen}
+                >
+                  Sistema de Informações de Crédito (SCR)
+                </Text>
+                , bem como da minha agenda de recebíveis em qualquer sistema
+                gerido por registradoras autorizadas pelo Banco Central do
+                Brasil.
+              </Text>
+            </Flex>
+          </Flex>
+
+          {/*modals*/}
+          {/*modal submit*/}
+          <Modal
+            isOpen={submitModal.isOpen}
+            // isOpen={true}
+            closeOnOverlayClick={false}
             onClose={submitModal.onClose}
-            submitStatus={submitStatus}
-          />
-        </Modal>
+            isCentered
+          >
+            <ModalSubmit
+              onClose={submitModal.onClose}
+              submitStatus={submitStatus}
+            />
+          </Modal>
 
-        {/*modal politica*/}
-        <Modal isOpen={politicaModal.isOpen} onClose={politicaModal.onClose}>
-          <ModalPolitica onClose={politicaModal.onClose} />
-        </Modal>
+          {/*modal politica*/}
+          <Modal isOpen={politicaModal.isOpen} onClose={politicaModal.onClose}>
+            <ModalPolitica onClose={politicaModal.onClose} />
+          </Modal>
 
-        {/*modal termos*/}
-        <Modal isOpen={termosModal.isOpen} onClose={termosModal.onClose}>
-          <ModalTermos onClose={termosModal.onClose} />
-        </Modal>
+          {/*modal termos*/}
+          <Modal isOpen={termosModal.isOpen} onClose={termosModal.onClose}>
+            <ModalTermos onClose={termosModal.onClose} />
+          </Modal>
 
-        {/*modal scr*/}
-        <Modal isOpen={scrModal.isOpen} onClose={scrModal.onClose}>
-          <ModalSCR onClose={scrModal.onClose} />
-        </Modal>
+          {/*modal scr*/}
+          <Modal isOpen={scrModal.isOpen} onClose={scrModal.onClose}>
+            <ModalSCR onClose={scrModal.onClose} />
+          </Modal>
 
-        {/*submit*/}
-        <Button
-          mt={isLargerThan768 ? '32px' : '40px'}
-          w="100%"
-          bgColor={colorBase}
-          color="white"
-          fontSize="14px"
-          borderRadius={8}
-          gap="8px"
-          onClick={() => handleSubmit()}
-          _hover={{
-            bgColor: { colorDark },
-          }}
-          isDisabled={formDisabled}
-          id="continuar"
-        >
-          <Text as="strong">Continuar</Text>
-        </Button>
+          {/*submit*/}
+          <Button
+            mt={isLargerThan768 ? '32px' : '40px'}
+            w="100%"
+            bgColor={colorBase}
+            color="white"
+            fontSize="14px"
+            borderRadius={8}
+            gap="8px"
+            onClick={() => handleSubmit()}
+            _hover={{
+              bgColor: { colorDark },
+            }}
+            isDisabled={formDisabled}
+            id="continuar"
+          >
+            <Text as="strong">Continuar</Text>
+          </Button>
 
-        {/*voltar*/}
-        <Button
-          mt="16px"
-          bgColor="neutral.white"
-          color={colorBase}
-          border="2px solid "
-          fontSize="14px"
-          borderRadius={8}
-          _disabled={{
-            borderColor: 'neutral.lighter',
-            color: 'neutral.dark',
-            pointerEvents: 'none',
-            cursor: 'not-allowed',
-          }}
-          onClick={() => {
-            handleGoBack();
-          }}
-          _hover={{ color: { colorDark } }}
-          id="voltar_form"
-        >
-          <Text as="strong">Voltar</Text>
-        </Button>
-      </Flex>
+          {/*voltar*/}
+          <Button
+            mt="16px"
+            bgColor="neutral.white"
+            color={colorBase}
+            border="2px solid "
+            fontSize="14px"
+            borderRadius={8}
+            _disabled={{
+              borderColor: 'neutral.lighter',
+              color: 'neutral.dark',
+              pointerEvents: 'none',
+              cursor: 'not-allowed',
+            }}
+            onClick={() => {
+              handleGoBack();
+            }}
+            _hover={{ color: { colorDark } }}
+            id="voltar_form"
+          >
+            <Text as="strong">Voltar</Text>
+          </Button>
+        </Flex>
+      </form>
     </Flex>
   );
 };
