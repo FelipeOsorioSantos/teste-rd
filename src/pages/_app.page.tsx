@@ -15,15 +15,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     setMounted(true);
     TagManager.initialize({ gtmId: 'GTM-K3F5TP5' });
   }, []);
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src =
-      'https://d335luupugsy2.cloudfront.net/js/loader-scripts/ef2d90e5-b3c3-48cb-ba0a-d1748f602137-loader.js';
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
-
   return (
     <>
       <AppSeo
