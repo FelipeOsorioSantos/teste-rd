@@ -1,4 +1,11 @@
-import { Button, Flex, Image, Modal, Text, useDisclosure } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Image,
+  Modal,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
@@ -85,7 +92,7 @@ export const Analise2 = () => {
   useEffect(() => {
     const script = document.createElement('script');
     script.src =
-      'https://d335.cloudfront.net/js/loader-scripts/809c4587-2f49-4369-loader.js';
+      'https://d335luupugsy2.cloudfront.net/js/loader-scripts/ef2d90e5-b3c3-48cb-ba0a-d1748f602137-loader.js';
     script.async = true;
     document.body.appendChild(script);
   }, []);
@@ -118,17 +125,17 @@ export const Analise2 = () => {
         company_name: formLog.nome_empresa,
         email: formLog.email_empresa,
         facebook: formLog.facebook_empresa,
-        instagram:  formLog.instagram_empresa,
+        instagram: formLog.instagram_empresa,
         fantasy_name: formLog.fantasia_empresa,
         foundation_year: formLog.data_fundacao,
         monthly_revenue: unmaskCurrency(formLog.faturamento_mensal),
         responsible_cpf: formLog.cpf,
         responsible_name: formLog.nome,
-        executive_name: formLog.nome_executivo 
-          ? formLog.nome_executivo 
-          : router.pathname == '/justa' 
-            ? 'Justa' 
-            : null,
+        executive_name: formLog.nome_executivo
+          ? formLog.nome_executivo
+          : router.pathname == '/justa'
+          ? 'Justa'
+          : null,
       },
       loan_value: analiseCreditoForm!.valor,
       loan_term: 24,
@@ -141,7 +148,7 @@ export const Analise2 = () => {
       loading: true,
     });
     submitModal.onOpen();
-    
+
     const response = await postCreateLoan(submitObj);
     setSubmitStatus({ ...response, loading: false });
     // if (response.status === 500) {
@@ -165,8 +172,8 @@ export const Analise2 = () => {
   // useEffect(() => {
   //   submitModal.onOpen();
   // });
-  const colorDark = router.pathname == '/justa'? '#004378': 'primary.dark'
-  const colorBase = router.pathname == '/justa' ? '#004378' : 'primary.base'
+  const colorDark = router.pathname == '/justa' ? '#004378' : 'primary.dark';
+  const colorBase = router.pathname == '/justa' ? '#004378' : 'primary.base';
 
   return (
     <Flex maxH="100vh" py="32px">
@@ -187,15 +194,16 @@ export const Analise2 = () => {
           scrollbarWidth: 'none' /* Firefox */,
         }}
       >
-      {router.pathname == '/justa' ?
-        <Flex gap={4}>
-          <Flex maxW="35%" mb="16px">
-            <Image src="./images/Logo_Justa.png" alt="Logotipo Justa" />
+        {router.pathname == '/justa' ? (
+          <Flex gap={4}>
+            <Flex maxW="35%" mb="16px">
+              <Image src="./images/Logo_Justa.png" alt="Logotipo Justa" />
+            </Flex>
+            <LogoShopbanx />
           </Flex>
+        ) : (
           <LogoShopbanx />
-        </Flex> :
-          <LogoShopbanx />
-      }
+        )}
 
         {/*titulo*/}
         <Flex>
@@ -219,7 +227,7 @@ export const Analise2 = () => {
           {/*empresa email*/}
           <AppInput
             maxLength={250}
-            type="text"
+            type="email"
             bgColor="white"
             errorColor="error.base"
             borderColor="neutral.dark"
@@ -309,8 +317,8 @@ export const Analise2 = () => {
             </Text>
           </Flex>
 
-           {/*empresa instagram*/}
-           <AppInput
+          {/*empresa instagram*/}
+          <AppInput
             maxLength={250}
             type="text"
             bgColor="white"
@@ -442,7 +450,7 @@ export const Analise2 = () => {
         <Text as="strong" mt="24px">
           Foi auxiliado por um executivo Shopbanx?
         </Text>
-        {router.pathname != '/justa' &&
+        {router.pathname != '/justa' && (
           <Flex direction="column" gap="16px" mt="16px" mb="8px">
             <AppInput
               maxLength={250}
@@ -465,7 +473,7 @@ export const Analise2 = () => {
               }}
             />
           </Flex>
-        }
+        )}
 
         {/*checkbox options*/}
         <Flex direction="column" mt="16px" gap="16px">
@@ -597,7 +605,7 @@ export const Analise2 = () => {
           gap="8px"
           onClick={() => handleSubmit()}
           _hover={{
-            bgColor: {colorDark},
+            bgColor: { colorDark },
           }}
           isDisabled={formDisabled}
           id="continuar"
@@ -622,7 +630,7 @@ export const Analise2 = () => {
           onClick={() => {
             handleGoBack();
           }}
-          _hover={{ color: {colorDark} }}
+          _hover={{ color: { colorDark } }}
           id="voltar_form"
         >
           <Text as="strong">Voltar</Text>
