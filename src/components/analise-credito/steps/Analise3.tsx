@@ -18,6 +18,8 @@ export const Analise3 = () => {
     }
   };
 
+  const colorDark = router.pathname == '/justa'? '#004378': 'primary.dark'
+  const colorBase = router.pathname == '/justa' ? '#004378' : 'primary.base'
   return (
     <Flex h={isLargerThan768 ? '100%' : '100vh'} alignItems="center">
       <Flex
@@ -66,8 +68,8 @@ export const Analise3 = () => {
           w="100%"
           bgColor="white"
           border="2px solid"
-          borderColor="primary.base"
-          color="primary.base"
+          borderColor={colorBase}
+          color={colorBase}
           fontSize="14px"
           borderRadius={8}
           gap="8px"
