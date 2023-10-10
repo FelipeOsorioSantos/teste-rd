@@ -134,8 +134,8 @@ export const Analise2 = () => {
         executive_name: formLog.nome_executivo
           ? formLog.nome_executivo
           : router.pathname == '/justa'
-          ? 'Justa'
-          : null,
+            ? 'Justa'
+            : null,
       },
       loan_value: analiseCreditoForm!.valor,
       loan_term: 24,
@@ -598,6 +598,7 @@ export const Analise2 = () => {
 
           {/*submit*/}
           <Button
+            type='submit'
             mt={isLargerThan768 ? '32px' : '40px'}
             w="100%"
             bgColor={colorBase}
