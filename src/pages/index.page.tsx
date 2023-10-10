@@ -27,7 +27,7 @@ const Home: NextPage = () => {
     opacity: 1
   }
   `;
-
+  console.log(' ')
   return (
     <Flex bg="#CA004F" h="100vh" w="100vw" position="relative">
       <Flex display="block" position="absolute" zIndex="0" h="100vh" w="100vw">
