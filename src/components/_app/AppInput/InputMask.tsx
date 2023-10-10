@@ -37,28 +37,27 @@ export const DashInputMask = forwardRef(({ errors, label, placeholder, name, ...
   const handleChange = (event: any) => setValue(event.target.value)
   return (
     <FormControl isInvalid={!!errors}>
-             {!!label && <FormLabel htmlFor={name} mb={0} color='content.10' fontSize="14px">{label} </FormLabel>}
-    <Input
-      ref={ref as React.Ref<HTMLInputElement>}
-      as={InputMask}
-      bg="#F3F3F3"
-    
-      variant='flushed'
-      focusBorderColor='primary.light'
-      placeholder={placeholder}
-      bgColor='white'
-      borderColor={value.length > 2 ? 'neutral.dark' : "neutral.base"}
-      onInput={handleChange}
-      _hover={{ bgColor: 'white' }}
-      _placeholder={{ opacity: 0.7 }}
-      {...otherProps}
-    />
-    {!!errors && (
-      <FormErrorMessage color="error.base" >
-         {errors.message}
-      </FormErrorMessage>
-  )}
-</FormControl>
+      {!!label && <FormLabel htmlFor={name} mb={0} color='content.10' fontSize="14px">{label} </FormLabel>}
+      <Input
+        ref={ref as React.Ref<HTMLInputElement>}
+        bg="#F3F3F3"
+
+        variant='flushed'
+        focusBorderColor='primary.light'
+        placeholder={placeholder}
+        bgColor='white'
+        borderColor={value.length > 2 ? 'neutral.dark' : "neutral.base"}
+        onInput={handleChange}
+        _hover={{ bgColor: 'white' }}
+        _placeholder={{ opacity: 0.7 }}
+        {...otherProps}
+      />
+      {!!errors && (
+        <FormErrorMessage color="error.base" >
+          {errors.message}
+        </FormErrorMessage>
+      )}
+    </FormControl>
   );
 });
 
