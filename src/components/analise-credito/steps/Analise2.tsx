@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { debounce } from 'lodash';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { postCreateLoan } from '../../../api/credit';
 import { useWindowSize } from '../../../hooks/useWindowSize';
@@ -66,6 +66,7 @@ const vinculosOptions = [
 
 export const Analise2 = () => {
   const router = useRouter();
+  const rdStationFormRef = useRef<HTMLFormElement | null>(null);
 
   //states
   const [authOptions, setAuthOptions] = useState(authOptionsInitial);
@@ -148,6 +149,10 @@ export const Analise2 = () => {
       loading: true,
     });
     submitModal.onOpen();
+
+    if (rdStationFormRef.current) {
+      rdStationFormRef.current.submit();
+    }
 
     const response = await postCreateLoan(submitObj);
     setSubmitStatus({ ...response, loading: false });
