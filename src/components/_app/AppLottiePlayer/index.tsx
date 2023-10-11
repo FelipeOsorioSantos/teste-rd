@@ -1,3 +1,4 @@
+console.log('1')
 /* import { Flex } from '@chakra-ui/react';
 import { Player } from '@lottiefiles/react-lottie-player';
 
