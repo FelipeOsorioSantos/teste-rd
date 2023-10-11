@@ -177,7 +177,7 @@ export const Analise2 = () => {
 
   return (
     <Flex maxH="100vh" py="32px">
-      <form>
+      <form onSubmit={handleSubmit}>
         <Flex
           w="100%"
           maxW={isLargerThan768 ? '384px' : '100%'}
@@ -227,6 +227,7 @@ export const Analise2 = () => {
           <Flex direction="column" gap="16px" mt="16px">
             {/*empresa email*/}
             <AppInput
+              id='email_empresa'
               maxLength={250}
               type="email"
               bgColor="white"
@@ -248,6 +249,7 @@ export const Analise2 = () => {
 
             {/*empresa cnpj*/}
             <AppInput
+              id='cnpj'
               bgColor="white"
               errorColor="error.base"
               borderColor="neutral.dark"
@@ -268,6 +270,7 @@ export const Analise2 = () => {
 
             {/*empresa fundacao*/}
             <AppInput
+              id='data_fundacao'
               bgColor="white"
               errorColor="error.base"
               borderColor="neutral.dark"
@@ -289,6 +292,7 @@ export const Analise2 = () => {
             {/*empresa faturamento mensal*/}
             <Flex direction="column">
               <AppInput
+                id='faturamento_mensal'
                 maxLength={20}
                 type="text"
                 currency="R$"
@@ -338,6 +342,7 @@ export const Analise2 = () => {
               }}
               label="Instagram"
               name="instagram_empresa"
+              id='instagram_empresa'
             />
 
             {/*facebook instagram*/}
@@ -360,6 +365,7 @@ export const Analise2 = () => {
               }}
               label="Facebook"
               name="facebook_empresa"
+              id='facebook_empresa'
             />
             {/*fim*/}
           </Flex>
@@ -385,6 +391,7 @@ export const Analise2 = () => {
               errors={errors['nome']}
               label="Nome"
               name="nome"
+              id='nome'
               onChange={(e) => {
                 setValue('nome', e.target.value);
                 debouncedValidate('nome');
@@ -406,6 +413,7 @@ export const Analise2 = () => {
               errors={errors['celular']}
               label="Celular"
               name="celular"
+              id='celular'
               onChange={(e) => {
                 setValue('celular', maskPhone(e.target.value));
                 debouncedValidate('celular');
@@ -427,6 +435,7 @@ export const Analise2 = () => {
               errors={errors['cpf']}
               label="CPF"
               name="cpf"
+              id='cpf'
               onChange={(e) => {
                 setValue('cpf', maskCPF(e.target.value));
                 debouncedValidate('cpf');
@@ -468,6 +477,7 @@ export const Analise2 = () => {
                 errors={errors['nome_executivo']}
                 label="Nome do executivo"
                 name="nome_executivo"
+                id='nome_executivo'
                 onChange={(e) => {
                   setValue('nome_executivo', e.target.value);
                   debouncedValidate('nome_executivo');
