@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+/* import { Flex } from '@chakra-ui/react';
 import { Player } from '@lottiefiles/react-lottie-player';
 
 interface AppLottiePlayerProps {
@@ -14,4 +14,4 @@ export const AppLottiePlayer = ({
       <Player autoplay loop src={`./lottie/${src}`} {...otherProps} />
     </Flex>
   );
-};
+}; */

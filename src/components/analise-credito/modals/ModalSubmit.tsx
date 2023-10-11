@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { useAnaliseCreditoStore } from '../../../store/useAnaliseCreditoStore';
 import { DynamicIcon } from '../../DynamicIcon';
-import { AppLottiePlayer } from '../../_app/AppLottiePlayer';
+//import { AppLottiePlayer } from '../../_app/AppLottiePlayer';
 import { CloseIcon } from '@chakra-ui/icons';
 
 // const testSubmitStatus = {
