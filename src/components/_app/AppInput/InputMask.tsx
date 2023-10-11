@@ -41,7 +41,6 @@ export const DashInputMask = forwardRef(({ errors, label, placeholder, name, ...
       <Input
         ref={ref as React.Ref<HTMLInputElement>}
         bg="#F3F3F3"
-
         variant='flushed'
         focusBorderColor='primary.light'
         placeholder={placeholder}
