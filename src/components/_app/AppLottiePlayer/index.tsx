@@ -11,7 +11,7 @@ export const AppLottiePlayer = ({
 }: AppLottiePlayerProps) => {
   return (
     <Flex>
-      <Player autoplay loop src={`./lottie/${src}`} {...otherProps} />
+      <Player autoplay loop src={`./lottie/${src}`} />
     </Flex>
   );
 };
